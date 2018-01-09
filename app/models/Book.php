@@ -49,6 +49,10 @@ class Book extends Model
     {
         $this->setSchema("phalcon");
         $this->setSource("book");
+        $this->belongsTo('uid', User::class, 'id', [
+            'alias' => 'user',
+            'reusable' => true
+        ]);
         parent::initialize();
     }
 

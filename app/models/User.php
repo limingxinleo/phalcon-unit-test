@@ -52,6 +52,21 @@ class User extends Model
         $this->hasMany('id', Book::class, 'uid', [
             'alias' => 'book',
         ]);
+        $this->hasOne('role_id', Role::class, 'id', [
+            'alias' => 'role',
+        ]);
+        $this->hasManyToMany(
+            'id',
+            UserTitle::class,
+            'uid',
+            'title_id',
+            Title::class,
+            'id',
+            [
+                'alias' => 'title',
+                'reusable' => true,
+            ]
+        );
         parent::initialize();
     }
 
