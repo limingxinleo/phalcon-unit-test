@@ -8,8 +8,8 @@
 // +----------------------------------------------------------------------
 namespace Tests\Core;
 
-use Tests\Test\App\Logics\Ins1;
-use Tests\Test\App\Logics\Ins2;
+use App\Biz\Instance\Ins1;
+use App\Biz\Instance\Ins2;
 use Tests\UnitTestCase;
 
 /**

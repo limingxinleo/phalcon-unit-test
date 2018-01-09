@@ -8,6 +8,7 @@
 // +----------------------------------------------------------------------
 namespace App\Core\Event;
 
+use App\Common\Model\SqlCount;
 use Xin\Phalcon\Logger\Factory;
 use Xin\Phalcon\Logger\Sys;
 use Phalcon\Db\Profiler;
@@ -60,6 +61,7 @@ class DbListener
         $this->_profiler->stopProfile();
         // 保存sql语句以及执行时间
         $this->logSql();
+        SqlCount::getInstance()->add();
     }
 
     public function getProfiler()

@@ -8,7 +8,7 @@
 // +----------------------------------------------------------------------
 namespace Tests\Core;
 
-use Tests\Test\App\Logics\Test;
+use App\Biz\Cache\Test;
 use Tests\UnitTestCase;
 
 /**

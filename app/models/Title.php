@@ -42,6 +42,7 @@ class Title extends Model
     {
         $this->setSchema("phalcon");
         $this->setSource("title");
+        parent::initialize();
     }
 
     /**

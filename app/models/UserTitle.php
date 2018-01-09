@@ -49,6 +49,7 @@ class UserTitle extends Model
     {
         $this->setSchema("phalcon");
         $this->setSource("user_title");
+        parent::initialize();
     }
 
     /**

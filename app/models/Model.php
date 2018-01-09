@@ -8,18 +8,32 @@
 // +----------------------------------------------------------------------
 namespace App\Models;
 
+use Phalcon\Mvc\Model\EagerLoadingTrait;
 use Xin\Phalcon\Logger\Sys as LogSys;
 use App\Core\Mvc\Model as BaseModel;
 
 abstract class Model extends BaseModel
 {
+    use EagerLoadingTrait;
+
     /**
      * Initialize method for model.
      */
     public function initialize()
     {
         // Sets if a model must use dynamic update instead of the all-field update
-        // $this->useDynamicUpdate(true);
+        $this->useDynamicUpdate(true);
+    }
+
+    public function beforeCreate()
+    {
+        $this->created_at = date('Y-m-d H:i:s');
+        $this->updated_at = date('Y-m-d H:i:s');
+    }
+
+    public function beforeUpdate()
+    {
+        $this->updated_at = date('Y-m-d H:i:s');
     }
 
     /**

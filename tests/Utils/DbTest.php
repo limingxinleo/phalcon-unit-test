@@ -9,7 +9,7 @@
 namespace Test\Utils;
 
 use App\Utils\DB;
-use Tests\Test\App\Utils\DB1;
+use App\Utils\DB1;
 use Tests\UnitTestCase;
 use PDO;
 use Phalcon\Db\Adapter\Pdo\Mysql as DbAdapter;
@@ -19,20 +19,6 @@ use App\Core\Event\DbListener;
 class DbTest extends UnitTestCase
 {
     public $table = 'test';
-
-    public function setUp()
-    {
-        parent::setUp();
-        if (!DB::tableExists('test')) {
-            $sql = "CREATE TABLE `{$this->table}` (
-              `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-              `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL DEFAULT '' COMMENT '姓名',
-              `age` tinyint(4) NOT NULL DEFAULT '0' COMMENT '年龄',
-              PRIMARY KEY (`id`)
-            ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;";
-            DB::execute($sql);
-        }
-    }
 
     public function testBaseCase()
     {
@@ -86,14 +72,14 @@ class DbTest extends UnitTestCase
 
     public function testInsert()
     {
-        $sql = "INSERT INTO {$this->table} (`name`,`age`) VALUES (?,?)";
-        $res = DB::execute($sql, ['limx', 26]);
+        $sql = "INSERT INTO `user` (`name`,`role_id`) VALUES (?,?)";
+        $res = DB::execute($sql, [uniqid(), 1]);
         $this->assertTrue($res);
     }
 
     public function testQuery()
     {
-        $sql = "SELECT * FROM `{$this->table}` WHERE `name` = ? LIMIT 1;";
+        $sql = "SELECT * FROM `user` WHERE `name` = ? LIMIT 1;";
         $res = DB::query($sql, ['limx']);
         $this->assertTrue(count($res) > 0);
         $this->assertTrue(is_array($res));
@@ -101,7 +87,7 @@ class DbTest extends UnitTestCase
 
     public function testFetch()
     {
-        $sql = "SELECT * FROM `{$this->table}` WHERE `name` = ? LIMIT 1;";
+        $sql = "SELECT * FROM `user` WHERE `name` = ? LIMIT 1;";
         $res = DB::fetch($sql, ['limx']);
         $this->assertTrue(is_array($res));
 
@@ -111,21 +97,27 @@ class DbTest extends UnitTestCase
 
     public function testExecute()
     {
-        $sql = "INSERT INTO {$this->table} (`name`,`age`) VALUES (?,?)";
-        $res = DB::execute($sql, ['Agnes', 25]);
+        $sql = "INSERT INTO `user` (`name`,`role_id`) VALUES (?,?)";
+        $res = DB::execute($sql, [uniqid(), 25]);
         $this->assertTrue($res);
 
-        $res = DB::execute($sql, ['Agnes', 25], true);
+        $res = DB::execute($sql, [uniqid(), 25], true);
         $this->assertEquals(1, $res);
 
-        $sql = "UPDATE {$this->table} SET age=? WHERE name =?";
-        $res = DB::execute($sql, [26, 'Agnes'], true);
+        $sql = "UPDATE `user` SET name=? WHERE role_id =? LIMIT 1";
+        $res = DB::execute($sql, [uniqid(), 25], true);
         $this->assertTrue(is_numeric($res));
     }
 
     public function testTableExist()
     {
-        $this->assertTrue(DB::tableExists($this->table));
+        $this->assertTrue(DB::tableExists('user'));
         $this->assertFalse(DB::tableExists('sss'));
+    }
+
+    public function testDelete()
+    {
+        $sql = "DELETE FROM `user` WHERE id > ?";
+        $this->assertTrue(DB::execute($sql, [3]));
     }
 }

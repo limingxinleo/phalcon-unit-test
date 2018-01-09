@@ -49,6 +49,7 @@ class Book extends Model
     {
         $this->setSchema("phalcon");
         $this->setSource("book");
+        parent::initialize();
     }
 
     /**

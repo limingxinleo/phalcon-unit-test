@@ -1,25 +1,28 @@
 <?php
 // +----------------------------------------------------------------------
-// | Test.php [ WE CAN DO IT JUST THINK IT ]
+// | SqlCount.php [ WE CAN DO IT JUST THINK IT ]
 // +----------------------------------------------------------------------
 // | Copyright (c) 2016-2017 limingxinleo All rights reserved.
 // +----------------------------------------------------------------------
 // | Author: limx <715557344@qq.com> <https://github.com/limingxinleo>
 // +----------------------------------------------------------------------
-namespace App\Biz\Cache;
+namespace App\Common\Model;
 
-use App\Core\Support\CacheBase;
-use Phalcon\Text;
+use Xin\Traits\Common\InstanceTrait;
 
-class Test extends CacheBase
+class SqlCount
 {
-    /**
-     * @desc   获取项目版本号
-     * @author limx
-     * @return mixed
-     */
-    public static function str()
+    use InstanceTrait;
+
+    public $count = 0;
+
+    public function add()
     {
-        return Text::random(Text::RANDOM_DISTINCT, 5);
+        $this->count++;
+    }
+
+    public function flush()
+    {
+        $this->count = 0;
     }
 }

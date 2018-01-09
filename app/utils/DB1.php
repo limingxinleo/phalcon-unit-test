@@ -1,25 +1,19 @@
 <?php
 // +----------------------------------------------------------------------
-// | Test.php [ WE CAN DO IT JUST THINK IT ]
+// | DB 工具类 [ WE CAN DO IT JUST THINK IT ]
 // +----------------------------------------------------------------------
 // | Copyright (c) 2016-2017 limingxinleo All rights reserved.
 // +----------------------------------------------------------------------
 // | Author: limx <715557344@qq.com> <https://github.com/limingxinleo>
 // +----------------------------------------------------------------------
-namespace App\Biz\Cache;
+// | Desc: 这里默认使用 limx\phalcon\DB工具类，如果需要请自行修改。
+// +----------------------------------------------------------------------
+namespace App\Utils;
 
-use App\Core\Support\CacheBase;
-use Phalcon\Text;
-
-class Test extends CacheBase
+class DB1 extends DB
 {
     /**
-     * @desc   获取项目版本号
-     * @author limx
-     * @return mixed
+     * @var string 定义DB服务名
      */
-    public static function str()
-    {
-        return Text::random(Text::RANDOM_DISTINCT, 5);
-    }
+    protected static $dbServiceName = 'db1';
 }

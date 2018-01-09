@@ -49,6 +49,10 @@ class User extends Model
     {
         $this->setSchema("phalcon");
         $this->setSource("user");
+        $this->hasOne('id', Book::class, 'uid', [
+            'alias' => 'book',
+        ]);
+        parent::initialize();
     }
 
     /**

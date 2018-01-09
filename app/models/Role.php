@@ -42,6 +42,7 @@ class Role extends Model
     {
         $this->setSchema("phalcon");
         $this->setSource("role");
+        parent::initialize();
     }
 
     /**
