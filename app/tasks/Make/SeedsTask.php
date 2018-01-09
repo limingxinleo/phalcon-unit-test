@@ -3,19 +3,20 @@
 namespace App\Tasks\Make;
 
 use App\Tasks\Task;
+use Xin\Cli\Color;
+use Xin\Support\File;
 
 class SeedsTask extends Task
 {
-
     public function mainAction()
     {
         $template = $this->getTemplate();
-        for ($i = 0; $i < 8; $i++) {
-            $dir = 'Cart';
+        for ($i = 1; $i < 3; $i++) {
+            $dir = 'Seeds';
             $class = 'Model' . $i;
-            $schema = sprintf(AppCode::DB_ORDER_SUFFIX, $i);
+            $source = 'seeds' . $i;
             $result = str_replace('%CLASS%', $class, $template);
-            $result = str_replace('%SCHEMA%', $schema, $result);
+            $result = str_replace('%SOURCE%', $source, $result);
             $path = APP_PATH . '/models/' . $dir;
             if (!is_dir($path)) {
                 File::getInstance()->makeDirectory($path);
@@ -29,15 +30,13 @@ class SeedsTask extends Task
     {
         return "<?php
 namespace App\Models\Seeds;
-use App\Models\Cart as CartBase;
-class %CLASS% extends CartBase {
+use App\Models\Seeds as Base;
+class %CLASS% extends Base {
     
-    public function getSchema()
+    public function getSource()
     {
-        return '%SCHEMA%';
+        return '%SOURCE%';
     }
 }";
     }
-
 }
-
