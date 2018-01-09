@@ -163,6 +163,74 @@ VALUES
 /*!40000 ALTER TABLE `user_title` ENABLE KEYS */;
 UNLOCK TABLES;
 
+# Dump of table seeds
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `seeds`;
+
+CREATE TABLE `seeds` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `uid` int(10) unsigned NOT NULL COMMENT '用户ID',
+  `name` varchar(32) NOT NULL DEFAULT '' COMMENT '种子名',
+  `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` datetime DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  KEY `UID_INDEX` (`uid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='分表测试 根据uid分表 基数 seeds1 偶数 seeds2\n本表不实际使用';
+
+# Dump of table seeds1
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `seeds1`;
+
+CREATE TABLE `seeds1` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `uid` int(10) unsigned NOT NULL COMMENT '用户ID',
+  `name` varchar(32) NOT NULL DEFAULT '' COMMENT '种子名',
+  `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` datetime DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  KEY `UID_INDEX` (`uid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='分表测试 根据uid分表 基数 seeds1 偶数 seeds2\n本表不实际使用';
+
+LOCK TABLES `seeds1` WRITE;
+/*!40000 ALTER TABLE `seeds1` DISABLE KEYS */;
+
+INSERT INTO `seeds1` (`id`, `uid`, `name`, `created_at`, `updated_at`)
+VALUES
+	(1,1,'12345','2018-01-09 15:17:46','2018-01-09 15:17:46'),
+	(2,1,'2','2018-01-09 15:17:50','2018-01-09 15:17:50'),
+	(4,3,'4','2018-01-09 15:17:58','2018-01-09 15:17:58');
+
+/*!40000 ALTER TABLE `seeds1` ENABLE KEYS */;
+UNLOCK TABLES;
+
+# Dump of table seeds1
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `seeds2`;
+
+CREATE TABLE `seeds2` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `uid` int(10) unsigned NOT NULL COMMENT '用户ID',
+  `name` varchar(32) NOT NULL DEFAULT '' COMMENT '种子名',
+  `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` datetime DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  KEY `UID_INDEX` (`uid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='分表测试 根据uid分表 基数 seeds1 偶数 seeds2\n本表不实际使用';
+
+LOCK TABLES `seeds2` WRITE;
+/*!40000 ALTER TABLE `seeds2` DISABLE KEYS */;
+
+INSERT INTO `seeds2` (`id`, `uid`, `name`, `created_at`, `updated_at`)
+VALUES
+	(1,2,'12345','2018-01-09 15:17:46','2018-01-09 15:17:46'),
+	(4,2,'4','2018-01-09 15:17:58','2018-01-09 15:17:58');
+
+/*!40000 ALTER TABLE `seeds2` ENABLE KEYS */;
+UNLOCK TABLES;
+
 
 
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
