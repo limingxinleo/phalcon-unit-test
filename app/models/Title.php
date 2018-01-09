@@ -76,5 +76,4 @@ class Title extends Model
     {
         return parent::findFirst($parameters);
     }
-
 }

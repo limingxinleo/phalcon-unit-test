@@ -83,5 +83,4 @@ class UserTitle extends Model
     {
         return parent::findFirst($parameters);
     }
-
 }

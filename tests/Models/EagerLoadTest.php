@@ -22,7 +22,6 @@ class EagerLoadTest extends UnitTestCase
         SqlCount::getInstance()->flush();
 
         $users = User::with('book', [
-            'order' => 'id DESC',
             'limit' => 2,
         ]);
 
@@ -31,6 +30,21 @@ class EagerLoadTest extends UnitTestCase
         }
 
         $this->assertEquals(2, SqlCount::getInstance()->count);
+    }
 
+    public function testType()
+    {
+        $users = User::find([
+            'limit' => 2,
+        ]);
+
+        $this->assertTrue(is_object($users));
+        $this->assertEquals('Phalcon\Mvc\Model\Resultset\Simple', get_class($users));
+
+        $users = User::with('book', [
+            'limit' => 2,
+        ]);
+
+        $this->assertTrue(is_array($users));
     }
 }

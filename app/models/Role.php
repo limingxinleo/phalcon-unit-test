@@ -76,5 +76,4 @@ class Role extends Model
     {
         return parent::findFirst($parameters);
     }
-
 }

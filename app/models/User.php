@@ -49,7 +49,7 @@ class User extends Model
     {
         $this->setSchema("phalcon");
         $this->setSource("user");
-        $this->hasOne('id', Book::class, 'uid', [
+        $this->hasMany('id', Book::class, 'uid', [
             'alias' => 'book',
         ]);
         parent::initialize();
@@ -86,5 +86,4 @@ class User extends Model
     {
         return parent::findFirst($parameters);
     }
-
 }
