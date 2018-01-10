@@ -87,4 +87,13 @@ class RelationTest extends UnitTestCase
             'PHP架构师'
         ], $title);
     }
+
+    public function testReloadRelation()
+    {
+        $user = User::findFirst(1);
+
+        $seeds = $user->reloadRelation()->seeds;
+
+        $this->assertTrue(count($seeds) > 0);
+    }
 }

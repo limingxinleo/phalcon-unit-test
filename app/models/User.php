@@ -70,6 +70,21 @@ class User extends Model
         parent::initialize();
     }
 
+    public function reloadRelation()
+    {
+        if (!isset($this->id)) {
+            throw new \Exception('User主键未知！');
+        }
+
+        $seeds = Seeds::getInstance($this->id);
+
+        $this->hasMany('id', get_class($seeds), 'uid', [
+            'alias' => 'seeds',
+        ]);
+
+        return $this;
+    }
+
     /**
      * Returns table name mapped in the model.
      *
