@@ -24,4 +24,12 @@ class HttpTest extends HttpTestCase
         $this->assertEquals(System::getInstance()->version(), $data->version);
         $this->assertEquals("You're now flying with Phalcon. Great things are about to happen!", $data->message);
     }
+
+    public function testRouterCase()
+    {
+        $response = $this->post('/api/index');
+        $data = $response->getContent();
+        $data = json_decode($data);
+        $this->assertEquals('I am IndexController@index', $data->message);
+    }
 }

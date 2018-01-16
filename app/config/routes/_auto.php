@@ -6,6 +6,7 @@
 // +----------------------------------------------------------------------
 // | Author: limx <715557344@qq.com> <https://github.com/limingxinleo>
 // +----------------------------------------------------------------------
+
 $router->add('/:controller/:action/:params', [
     'namespace' => 'App\Controllers',
     'controller' => 1,
@@ -17,3 +18,5 @@ $router->add('/:controller', [
     'namespace' => 'App\Controllers',
     'controller' => 1
 ]);
+
+$router->add('/api/index', 'App\\Controllers\\Api\\Index::index');
