@@ -1,6 +1,6 @@
 <?php
 // +----------------------------------------------------------------------
-// | User.php [ WE CAN DO IT JUST THINK IT ]
+// | Book.php [ WE CAN DO IT JUST THINK IT ]
 // +----------------------------------------------------------------------
 // | Copyright (c) 2016-2017 limingxinleo All rights reserved.
 // +----------------------------------------------------------------------
@@ -8,21 +8,16 @@
 // +----------------------------------------------------------------------
 namespace App\Models\Collections;
 
-class User extends Mongo
+class Book extends Mongo
 {
-    public $id;
-
     public $name;
 
-    public $age;
+    public $publis_time;
 
-    /**
-     * Returns collection name mapped in the model
-     *
-     * @return string
-     */
+    public $author_id;
+
     public function getSource()
     {
-        return 'user';
+        return 'book';
     }
 }

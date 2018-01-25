@@ -13,7 +13,7 @@ use Tests\UnitTestCase;
 
 class MongoTest extends UnitTestCase
 {
-    public $table = 'user';
+    public $table = 'test';
 
     public function setUp()
     {
