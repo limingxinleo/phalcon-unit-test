@@ -33,10 +33,11 @@ class CollectionsTest extends UnitTestCase
             ]);
 
             $this->assertTrue(count($users) > 0);
+            $this->assertTrue($user->delete());
         }
     }
 
-    public function testAddBookCase()
+    public function testSaveCase()
     {
         if (di('config')->mongo->isCollection) {
             $id = Text::random(Text::RANDOM_ALNUM, 16);
