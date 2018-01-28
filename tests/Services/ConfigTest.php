@@ -16,24 +16,6 @@ use Tests\UnitTestCase;
  */
 class ConfigTest extends UnitTestCase
 {
-    public function testAppCase()
-    {
-        $project = app('project-name');
-        $this->assertEquals('limx-phalcon-project', $project);
-    }
-
-    public function testAppGetCase()
-    {
-        $project = di('app')->get('project-name');
-        $this->assertEquals('limx-phalcon-project', $project);
-    }
-
-    public function testAppGetDotCase()
-    {
-        $err = app('error-code.500');
-        $this->assertEquals('服务器错误！', $err);
-    }
-
     public function testConfigCase()
     {
         $version = di('config')->get('version');
