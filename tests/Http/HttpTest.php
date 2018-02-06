@@ -32,4 +32,31 @@ class HttpTest extends HttpTestCase
         $data = json_decode($data);
         $this->assertEquals('I am IndexController@index', $data->message);
     }
+
+    public function testRequestFileCase()
+    {
+        $response = $this->post('/api/index/upload');
+        $data = $response->getContent();
+        $data = json_decode($data);
+
+        $this->assertNull($data->key);
+        $this->assertNull($data->name);
+
+        $_FILES = [
+            'image' => [
+                'name' => 'a.png',
+                'type' => 'image/png',
+                'tmp_name' => 'xxxx/a.png',
+                'error' => 0,
+                'size' => 100,
+            ],
+        ];
+
+        $response = $this->post('/api/index/upload');
+        $data = $response->getContent();
+        $data = json_decode($data);
+        
+        $this->assertEquals('image', $data->key);
+        $this->assertEquals('a.png', $data->name);
+    }
 }
