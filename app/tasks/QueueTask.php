@@ -17,7 +17,7 @@ class QueueTask extends Queue
     protected $maxProcesses = 2;
 
     // 子进程最大循环处理次数
-    // protected $processHandleMaxNumber = 10000;
+    protected $processHandleMaxNumber = 10000;
 
     protected $errorKey = '';
 
