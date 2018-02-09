@@ -36,7 +36,7 @@ abstract class HttpTestCase extends UnitTestCase
     {
         parent::setUp();
         $this->client = new Client([
-            'base_uri' => 'http://phalcon.xin/'
+            'base_uri' => 'http://phpunit.phalcon.xin/'
         ]);
     }
 
