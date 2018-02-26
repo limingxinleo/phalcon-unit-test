@@ -19,7 +19,7 @@ class SocketTest extends UnitTestCase
     public function testSocketSend()
     {
         $client = new swoole_client(SWOOLE_TCP | SWOOLE_KEEP);
-        if (!$client->connect('127.0.0.1', 11521, 0.1)) {
+        if (!$client->connect('127.0.0.1', 11520, 0.1)) {
             throw new RpcException("connect failed. Error: {$client->errCode}");
         }
 

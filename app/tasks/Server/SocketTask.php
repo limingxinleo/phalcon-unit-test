@@ -14,7 +14,7 @@ class SocketTask extends Socket
 
     public function onConstruct()
     {
-        $this->port = 11521;
+        $this->port = 11520;
         $this->host = '127.0.0.1';
     }
 
