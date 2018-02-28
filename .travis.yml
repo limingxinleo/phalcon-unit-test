@@ -50,7 +50,11 @@ install:
   - sudo sed -e "s?%TRAVIS_BUILD_DIR%?$(pwd)?g" $TRAVIS_BUILD_DIR/tests/_ci/phalcon.conf > $TRAVIS_BUILD_DIR/tests/_ci/phalcon.conf
   - sudo cp -f $TRAVIS_BUILD_DIR/tests/_ci/phalcon.conf /etc/nginx/sites-enabled/phalcon.conf
   - sudo nginx
-  - sudo php-fpm
+  # 配置PHP-FPM
+  - sudo cp ~/.phpenv/versions/$(phpenv version-name)/etc/php-fpm.conf.default ~/.phpenv/versions/$(phpenv version-name)/etc/php-fpm.conf
+  - sudo cp ~/.phpenv/versions/$(phpenv version-name)/etc/php-fpm.d/www.conf.default ~/.phpenv/versions/$(phpenv version-name)/etc/php-fpm.d/www.conf
+  - sudo sed -i -e "s,www-data,travis,g" ~/.phpenv/versions/$(phpenv version-name)/etc/php-fpm.d/www.conf
+  - ~/.phpenv/versions/$(phpenv version-name)/sbin/php-fpm
 
 before_script:
   - php run server:socket --daemonize
