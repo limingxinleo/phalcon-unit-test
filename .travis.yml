@@ -10,11 +10,17 @@ php:
   - 7.2
   - nightly
 
+git:
+  depth: 1
+
 services:
   - redis-server
+  - mongodb
 
 before_install:
   - composer self-update
+  - echo "extension = phalcon.so" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
+  - echo "extension = swoole.so" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
 
 install:
   - composer install --prefer-dist --optimize-autoloader --quiet
