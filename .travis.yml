@@ -18,6 +18,11 @@ services:
   - mongodb
 
 before_install:
+  - sudo add-apt-repository ppa:ondrej/php
+  - sudo apt-get update
+  - sudo apt-get install php$(phpenv version-name) php$(phpenv version-name)-cgi php$(phpenv version-name)-cli php$(phpenv version-name)-common php$(phpenv version-name)-curl php$(phpenv version-name)-dev \
+    php$(phpenv version-name)-gd php$(phpenv version-name)-json php$(phpenv version-name)-ldap php$(phpenv version-name)-mysql php$(phpenv version-name)-odbc php$(phpenv version-name)-opcache \
+    php$(phpenv version-name)-xml php$(phpenv version-name)-fpm php$(phpenv version-name)-mbstring php$(phpenv version-name)-mcrypt php$(phpenv version-name)-zip php$(phpenv version-name)-phalcon php$(phpenv version-name)-redis
   - composer self-update
   - pecl install phalcon
   - pecl install swoole
