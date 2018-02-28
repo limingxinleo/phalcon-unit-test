@@ -45,7 +45,8 @@ install:
   - cp .env.example .env
   - php run
   # 配置Nginx
-  - sed -e "s?%TRAVIS_BUILD_DIR%?$(pwd)?g" tests/_ci/phalcon.conf >> /etc/nginx/conf.d/phalcon.conf
+  - nginx -T
+  - sed -e "s?%TRAVIS_BUILD_DIR%?$(pwd)?g" tests/_ci/phalcon.conf > /etc/nginx/conf.d/phalcon.conf
   - sudo nginx -s reload
 
 before_script:
