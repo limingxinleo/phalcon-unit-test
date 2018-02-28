@@ -44,7 +44,8 @@ install:
   - composer install --prefer-dist --optimize-autoloader --quiet
   - cp .env.example .env
   - php run
-  # 配置Nginx
+  # 安装Nginx
+  - sudo apt-get install nginx
   - nginx -T
   - sed -e "s?%TRAVIS_BUILD_DIR%?$(pwd)?g" tests/_ci/phalcon.conf > /etc/nginx/conf.d/phalcon.conf
   - sudo nginx -s reload
