@@ -44,20 +44,13 @@ install:
   - composer install --prefer-dist --optimize-autoloader --quiet
   - cp .env.example .env
   - php run
-  # 安装Nginx
-  - sudo apt-get install nginx
-  - sudo nginx -V
-  - sudo sed -e "s?%TRAVIS_BUILD_DIR%?$(pwd)?g" $TRAVIS_BUILD_DIR/tests/_ci/phalcon.conf > $TRAVIS_BUILD_DIR/tests/_ci/phalcon.conf
-  - sudo cp -f $TRAVIS_BUILD_DIR/tests/_ci/phalcon.conf /etc/nginx/sites-enabled/phalcon.conf
-  - sudo nginx
-  # 配置PHP-FPM
-  - sudo cp ~/.phpenv/versions/$(phpenv version-name)/etc/php-fpm.conf.default ~/.phpenv/versions/$(phpenv version-name)/etc/php-fpm.conf
-  - sudo cp ~/.phpenv/versions/$(phpenv version-name)/etc/php-fpm.d/www.conf.default ~/.phpenv/versions/$(phpenv version-name)/etc/php-fpm.d/www.conf
-  - sudo sed -i -e "s,www-data,travis,g" ~/.phpenv/versions/$(phpenv version-name)/etc/php-fpm.d/www.conf
-  - ~/.phpenv/versions/$(phpenv version-name)/sbin/php-fpm
 
 before_script:
+  # 启动PHP
   - php run server:socket --daemonize
+  - cd $TRAVIS_BUILD_DIR/public
+  - php -S localhost:8080
 
 script:
+  - cd $TRAVIS_BUILD_DIR
   - ./vendor/bin/phpunit
