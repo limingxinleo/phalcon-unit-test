@@ -45,7 +45,7 @@ install:
   - cd $TRAVIS_BUILD_DIR/cphalcon/build
   - sudo ./install --phpize $(phpenv which phpize) --php-config $(phpenv which php-config)
   - phpenv config-add $TRAVIS_BUILD_DIR/tests/_ci/phalcon.ini
-    # We use this file as our custom PHP config
+  # We use this file as our custom PHP config
   - phpenv config-add $TRAVIS_BUILD_DIR/tests/_ci/ci.ini
   # 安装项目
   - composer self-update
@@ -59,6 +59,7 @@ before_script:
   - cd $TRAVIS_BUILD_DIR
   - php run server:socket --daemonize
   - php -S localhost:8080 -t public &
+  - php run queue &
 
 script:
   - cd $TRAVIS_BUILD_DIR

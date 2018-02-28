@@ -11,6 +11,7 @@ namespace Tests\Services;
 use App\Core\System;
 use App\Jobs\TestJob;
 use App\Utils\Queue;
+use App\Utils\Redis;
 use Tests\UnitTestCase;
 
 /**
@@ -20,11 +21,11 @@ class QueueTest extends UnitTestCase
 {
     public function testQueueCase()
     {
-        // for ($i = 1; $i <= 10; $i++) {
-        //     Queue::delay(new TestJob(), $i);
-        // }
-        for ($i = 0; $i < 500000; $i++) {
+        Redis::del('php:unit:incr');
+        for ($i = 0; $i < 50; $i++) {
             Queue::push(new TestJob());
         }
+        sleep(1);
+        $this->assertEquals(50, Redis::get('php:unit:incr'));
     }
 }
