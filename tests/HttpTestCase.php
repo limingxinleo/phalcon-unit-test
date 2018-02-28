@@ -50,7 +50,6 @@ abstract class HttpTestCase extends UnitTestCase
         if (env('PHPUNIT_ENGINE') === 'php') {
             $arguments[0] = '?_url=' . $arguments[0];
         }
-        dump($arguments);
         $res = $this->client->$name(...$arguments);
         return $res;
     }

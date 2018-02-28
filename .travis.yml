@@ -8,11 +8,11 @@ addons:
     - phpunit.phalcon.xin
 
 php:
-#  - 5.6
+  - 5.6
   - 7.0
-#  - 7.1
-#  - 7.2
-#  - nightly
+  - 7.1
+  - 7.2
+  - nightly
 
 git:
   depth: 1
@@ -47,9 +47,9 @@ install:
 
 before_script:
   # 启动PHP
+  - cd $TRAVIS_BUILD_DIR
   - php run server:socket --daemonize
-  - cd $TRAVIS_BUILD_DIR/public
-  - php -S localhost:8080
+  - php -S localhost:8080 -t public &
 
 script:
   - cd $TRAVIS_BUILD_DIR
