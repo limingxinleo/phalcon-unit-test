@@ -46,9 +46,8 @@ install:
   - php run
   # 安装Nginx
   - sudo apt-get install nginx
-  - nginx -T
   - sed -e "s?%TRAVIS_BUILD_DIR%?$(pwd)?g" tests/_ci/phalcon.conf > /etc/nginx/conf.d/phalcon.conf
-  - sudo nginx -s reload
+  - sudo nginx
 
 before_script:
   - php run server:socket --daemonize
