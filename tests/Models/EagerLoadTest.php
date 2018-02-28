@@ -9,6 +9,7 @@
 namespace Tests\Models;
 
 use App\Common\Model\SqlCount;
+use App\Models\Book;
 use App\Models\User;
 use Tests\UnitTestCase;
 
@@ -19,6 +20,11 @@ class EagerLoadTest extends UnitTestCase
 {
     public function testEagerLoadTraitCase()
     {
+        /** @var \Phalcon\Mvc\Model\MetaDataInterface $meta */
+        $meta = di('modelsMetadata');
+        $meta->readMetaData(new User());
+        $meta->readMetaData(new Book());
+
         SqlCount::getInstance()->flush();
 
         $users = User::with('book', [
