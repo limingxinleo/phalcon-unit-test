@@ -36,7 +36,7 @@ install:
   - sudo apt-get update
   - sudo apt-get install libpcre3-dev gcc make re2c
   # 安装Swoole扩展
-  - pecl install swoole
+  - pecl install swoole-1.10.1
 #  - git clone https://github.com/limingxinleo/swoole-src.git -b release --depth=1
 #  - cd $TRAVIS_BUILD_DIR/swoole-src
 #  - sudo ./build.sh
