@@ -10,5 +10,20 @@ php:
   - 7.2
   - nightly
 
+services:
+  - redis-server
+
+before_install:
+  - composer self-update
+
 install:
   - composer install --prefer-dist --optimize-autoloader --quiet
+  - cp .env.example .env
+  - php run
+
+before_script:
+  - mysql -u root -e 'CREATE DATABASE phalcon;'
+  - php run server:socket --daemonize
+
+script:
+  - ./vendor/bin/phpunit
