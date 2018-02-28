@@ -21,4 +21,3 @@ printf "\n" | pecl install --force redis &> /dev/null
 echo 'extension="mongo.so"' >> "$(phpenv root)/versions/$(phpenv version-name)/etc/php.ini"
 echo 'extension="memcache.so"' >> "$(phpenv root)/versions/$(phpenv version-name)/etc/php.ini"
 echo 'extension="memcached.so"' >> "$(phpenv root)/versions/$(phpenv version-name)/etc/php.ini"
-echo 'extension="swoole.so"' >> "$(phpenv root)/versions/$(phpenv version-name)/etc/php.ini"

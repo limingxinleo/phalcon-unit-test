@@ -20,5 +20,3 @@ printf "\n" | pecl install --force swoole &> /dev/null
 # See https://pear.php.net/bugs/bug.php?id=21007
 sed -i '1s/^/extension="apcu.so"\n/' "$(phpenv root)/versions/$(phpenv version-name)/etc/php.ini"
 echo 'extension="memcached.so"' >> "$(phpenv root)/versions/$(phpenv version-name)/etc/php.ini"
-echo 'extension="swoole.so"' >> "$(phpenv root)/versions/$(phpenv version-name)/etc/php.ini"
-
