@@ -19,6 +19,8 @@ services:
 
 before_install:
   - composer self-update
+  - pecl install phalcon
+  - pecl install swoole
   - echo "extension = phalcon.so" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
   - echo "extension = swoole.so" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
 
