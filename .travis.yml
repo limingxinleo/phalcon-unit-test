@@ -39,7 +39,7 @@ install:
   # 安装项目
   - composer self-update
   - cd $TRAVIS_BUILD_DIR
-  - composer install --prefer-dist --optimize-autoloader --quiet
+  - composer install --prefer-dist --optimize-autoloader
   - cp .env.example .env
   - php run
 
