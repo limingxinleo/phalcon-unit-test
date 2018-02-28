@@ -16,7 +16,7 @@ TRAVIS_BUILD_DIR="${TRAVIS_BUILD_DIR:-$(dirname $(dirname $CURRENT_DIR))}"
 
 echo -e "Create MySQL database..."
 mysql -u root -e "CREATE DATABASE IF NOT EXISTS phalcon charset=utf8mb4 collate=utf8mb4_unicode_ci;"
-cat "${TRAVIS_BUILD_DIR}/msyql.sql" | mysql -u root phalcon
+cat "${TRAVIS_BUILD_DIR}/mysql.sql" | mysql -u root phalcon
 echo -e "Done\n"
 
 wait
