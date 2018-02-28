@@ -22,7 +22,7 @@ before_install:
   - sudo apt-get install libpcre3-dev gcc make re2c
   - sudo git clone https://github.com/phalcon/cphalcon.git --depth=1
   - cd cphalcon/build
-  - sudo ./install
+  - sudo ./install --phpize $(phpenv which phpize) --php-config $(phpenv which php-config)
   - phpenv config-add $TRAVIS_BUILD_DIR/tests/_ci/phalcon.ini
     # We use this file as our custom PHP config
   - phpenv config-add $TRAVIS_BUILD_DIR/tests/_ci/ci.ini
