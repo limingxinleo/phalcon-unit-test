@@ -30,10 +30,10 @@ install:
   - sudo apt-get update
   - sudo apt-get install libpcre3-dev gcc make re2c
   # 安装Swoole扩展
-  - git clone git@github.com:limingxinleo/swoole-src.git -b release --depth=1
+  - sudo git clone git@github.com:limingxinleo/swoole-src.git -b release --depth=1
   - sudo ./build.sh
   # 安装Phalcon扩展
-  - git clone https://github.com/phalcon/cphalcon.git --depth=1
+  - sudo git clone https://github.com/phalcon/cphalcon.git --depth=1
   - cd $TRAVIS_BUILD_DIR/cphalcon/build
   - sudo ./install --phpize $(phpenv which phpize) --php-config $(phpenv which php-config)
   - phpenv config-add $TRAVIS_BUILD_DIR/tests/_ci/phalcon.ini
