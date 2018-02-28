@@ -6,12 +6,12 @@ sudo: false
 addons:
   hosts:
     - phpunit.phalcon.xin
-  apt:
-    sources:
-      - george-edison55-precise-backports
-    packages:
-      - cmake-data
-      - cmake
+#  apt:
+#    sources:
+#      - george-edison55-precise-backports
+#    packages:
+#      - cmake-data
+#      - cmake
 
 php:
   - 7.0
@@ -33,11 +33,12 @@ before_install:
 install:
   # 更新扩展
   - sudo apt-get update
-  - sudo apt-get install libpcre3-dev gcc make re2c g++
+  - sudo apt-get install libpcre3-dev gcc make re2c
   # 安装Swoole扩展
-  - git clone https://github.com/limingxinleo/swoole-src.git -b release --depth=1
-  - cd $TRAVIS_BUILD_DIR/swoole-src
-  - sudo ./build.sh
+  - pecl install swoole
+#  - git clone https://github.com/limingxinleo/swoole-src.git -b release --depth=1
+#  - cd $TRAVIS_BUILD_DIR/swoole-src
+#  - sudo ./build.sh
   # 安装Phalcon扩展
   - cd $TRAVIS_BUILD_DIR
   - git clone https://github.com/phalcon/cphalcon.git --depth=1
