@@ -6,6 +6,12 @@ sudo: false
 addons:
   hosts:
     - phpunit.phalcon.xin
+  apt:
+    sources:
+      - george-edison55-precise-backports
+    packages:
+      - cmake-data
+      - cmake
 
 php:
   - 7.0
@@ -28,14 +34,6 @@ install:
   # 更新扩展
   - sudo apt-get update
   - sudo apt-get install libpcre3-dev gcc make re2c g++
-  # 安装CMake
-  - wget https://cmake.org/files/v3.10/cmake-3.10.2.tar.gz
-  - tar -zxvf cmake-3.10.2.tar.gz
-  - cd $TRAVIS_BUILD_DIR/cmake-3.10.2
-  - sudo ./bootstrap
-  - sudo make
-  - sudo make install
-  - cmake --version
   # 安装Swoole扩展
   - git clone https://github.com/limingxinleo/swoole-src.git -b release --depth=1
   - cd $TRAVIS_BUILD_DIR/swoole-src
