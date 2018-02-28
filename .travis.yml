@@ -18,7 +18,6 @@ git:
 services:
   - redis-server
   - mongodb
-  - nginx
 
 before_install:
   - export PHP_MAJOR="$(`phpenv which php` -r 'echo phpversion();' | cut -d '.' -f 1)"
@@ -28,7 +27,7 @@ before_install:
 install:
   # 更新扩展
   - sudo apt-get update
-  - sudo apt-get install libpcre3-dev gcc make re2c
+  - sudo apt-get install libpcre3-dev gcc make re2c cmake
   # 安装Swoole扩展
   - git clone https://github.com/limingxinleo/swoole-src.git -b release --depth=1
   - cd $TRAVIS_BUILD_DIR/swoole-src
