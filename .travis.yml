@@ -4,11 +4,11 @@ dist: trusty
 sudo: false
 
 php:
-  - 5.6
+#  - 5.6
   - 7.0
-  - 7.1
-  - 7.2
-  - nightly
+#  - 7.1
+#  - 7.2
+#  - nightly
 
 git:
   depth: 1
@@ -18,16 +18,15 @@ services:
   - mongodb
 
 before_install:
-  - sudo add-apt-repository ppa:ondrej/php
   - sudo apt-get update
-  - sudo apt-get install php$(phpenv version-name) php$(phpenv version-name)-cgi php$(phpenv version-name)-cli php$(phpenv version-name)-common php$(phpenv version-name)-curl php$(phpenv version-name)-dev \
-    php$(phpenv version-name)-gd php$(phpenv version-name)-json php$(phpenv version-name)-ldap php$(phpenv version-name)-mysql php$(phpenv version-name)-odbc php$(phpenv version-name)-opcache \
-    php$(phpenv version-name)-xml php$(phpenv version-name)-fpm php$(phpenv version-name)-mbstring php$(phpenv version-name)-mcrypt php$(phpenv version-name)-zip php$(phpenv version-name)-phalcon php$(phpenv version-name)-redis
+  - sudo apt-get install libpcre3-dev gcc make re2c
+  - sudo git clone https://github.com/phalcon/cphalcon.git --depth=1
+  - sudo ./build/install
+  - phpenv config-add $TRAVIS_BUILD_DIR/tests/_ci/phalcon.ini
+    # We use this file as our custom PHP config
+  - phpenv config-add $TRAVIS_BUILD_DIR/tests/_ci/ci.ini
   - composer self-update
-  - pecl install phalcon
-  - pecl install swoole
   - echo "extension = phalcon.so" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
-  - echo "extension = swoole.so" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
 
 install:
   - composer install --prefer-dist --optimize-autoloader --quiet
