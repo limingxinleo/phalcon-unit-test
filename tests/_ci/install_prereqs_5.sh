@@ -15,7 +15,10 @@ printf "\n" | pecl install --force apcu-4.0.11 &> /dev/null
 printf "\n" | pecl install --force igbinary &> /dev/null
 printf "\n" | pecl install --force imagick &> /dev/null
 printf "\n" | pecl install --force yaml-1.3.1 &> /dev/null
+printf "\n" | pecl install --force swoole-1.10.1 &> /dev/null
+printf "\n" | pecl install --force redis &> /dev/null
 
 echo 'extension="mongo.so"' >> "$(phpenv root)/versions/$(phpenv version-name)/etc/php.ini"
 echo 'extension="memcache.so"' >> "$(phpenv root)/versions/$(phpenv version-name)/etc/php.ini"
 echo 'extension="memcached.so"' >> "$(phpenv root)/versions/$(phpenv version-name)/etc/php.ini"
+echo 'extension="swoole.so"' >> "$(phpenv root)/versions/$(phpenv version-name)/etc/php.ini"

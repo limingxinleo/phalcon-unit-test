@@ -15,7 +15,10 @@ printf "\n" | pecl install --force apcu_bc &> /dev/null
 printf "\n" | pecl install --force igbinary &> /dev/null
 printf "\n" | pecl install --force imagick &> /dev/null
 printf "\n" | pecl install --force yaml-2.0.0 &> /dev/null
+printf "\n" | pecl install --force swoole &> /dev/null
 
 # See https://pear.php.net/bugs/bug.php?id=21007
 sed -i '1s/^/extension="apcu.so"\n/' "$(phpenv root)/versions/$(phpenv version-name)/etc/php.ini"
 echo 'extension="memcached.so"' >> "$(phpenv root)/versions/$(phpenv version-name)/etc/php.ini"
+echo 'extension="swoole.so"' >> "$(phpenv root)/versions/$(phpenv version-name)/etc/php.ini"
+
