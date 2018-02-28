@@ -3,6 +3,10 @@ language: php
 dist: trusty
 sudo: false
 
+addons:
+  hosts:
+    - phpunit.phalcon.xin
+
 php:
 #  - 5.6
   - 7.0
@@ -16,6 +20,7 @@ git:
 services:
   - redis-server
   - mongodb
+  - nginx
 
 before_install:
   - export PHP_MAJOR="$(`phpenv which php` -r 'echo phpversion();' | cut -d '.' -f 1)"
@@ -23,6 +28,7 @@ before_install:
   - bash tests/_ci/setup_dbs.sh
 
 install:
+  # 更新扩展
   - sudo apt-get update
   - sudo apt-get install libpcre3-dev gcc make re2c
   - pecl install swoole
@@ -32,14 +38,17 @@ install:
   - phpenv config-add $TRAVIS_BUILD_DIR/tests/_ci/phalcon.ini
     # We use this file as our custom PHP config
   - phpenv config-add $TRAVIS_BUILD_DIR/tests/_ci/ci.ini
+  # 安装项目
   - composer self-update
   - cd $TRAVIS_BUILD_DIR
   - composer install --prefer-dist --optimize-autoloader --quiet
   - cp .env.example .env
   - php run
+  # 配置Nginx
+  - sed -e "s?%TRAVIS_BUILD_DIR%?$(pwd)?g" tests/_ci/phalcon.conf >> /etc/nginx/conf.d/phalcon.conf
+  - sudo nginx -s reload
 
 before_script:
-  - mysql -u root -e 'CREATE DATABASE phalcon;'
   - php run server:socket --daemonize
 
 script:
