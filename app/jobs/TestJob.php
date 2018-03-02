@@ -15,4 +15,3 @@ class TestJob implements JobInterface
         Redis::incr('php:unit:incr');
     }
 }
-

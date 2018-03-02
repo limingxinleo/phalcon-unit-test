@@ -76,4 +76,3 @@ class SocketTask extends Socket
         ];
     }
 }
-
