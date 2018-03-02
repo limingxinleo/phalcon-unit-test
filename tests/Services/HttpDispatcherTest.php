@@ -18,19 +18,14 @@ class HttpDispatcherTest extends UnitTestCase
 {
     protected $app;
 
-    public function __construct()
-    {
-        $di = di();
-        $this->app = new Application($di);
-    }
-
     public function testGetControllerNameCase()
     {
         $service = di('dispatcher');
-        $this->app->handle('/');
+        $app = new Application(di());
+        $app->handle('/');
         $this->assertEquals('Index', ucfirst($service->getControllerName()));
 
-        $this->app->handle('/error/show404');
+        $app->handle('/error/show404');
         $this->assertEquals('Error', ucfirst($service->getControllerName()));
     }
 
