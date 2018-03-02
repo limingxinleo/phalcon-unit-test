@@ -30,4 +30,17 @@ class IndexController extends Controller
             'name' => null
         ]);
     }
+
+    /**
+     * @desc
+     * @author limx
+     * @Middleware('test')
+     * @return \Phalcon\Http\Response|\Phalcon\Http\ResponseInterface
+     */
+    public function middlewareAction()
+    {
+        return $this->response->setJsonContent([
+            'success' => true,
+        ]);
+    }
 }
