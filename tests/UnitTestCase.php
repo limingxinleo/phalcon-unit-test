@@ -56,7 +56,6 @@ abstract class UnitTestCase extends TestCase implements InjectionAwareInterface
         $di = Di::getDefault();
 
         $this->di = $di;
-
     }
 
     /**
