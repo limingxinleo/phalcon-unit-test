@@ -8,6 +8,7 @@
 // +----------------------------------------------------------------------
 namespace Tests\Units;
 
+use App\Common\Clients\TestClient;
 use Tests\UnitTestCase;
 use swoole_client;
 
@@ -28,5 +29,13 @@ class SocketTest extends UnitTestCase
         $res = $client->recv();
 
         $this->assertEquals('receive:' . $data, $res);
+    }
+
+    public function testSwooleRpcGetInteger()
+    {
+        $client = TestClient::getInstance();
+        $res = $client->getInteger();
+
+        $this->assertEquals(1, $res);
     }
 }
