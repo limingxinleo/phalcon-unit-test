@@ -16,8 +16,6 @@ use Phalcon\Mvc\Application;
  */
 class HttpDispatcherTest extends UnitTestCase
 {
-    protected $app;
-
     public function testGetControllerNameCase()
     {
         $service = di('dispatcher');

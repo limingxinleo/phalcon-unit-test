@@ -24,6 +24,4 @@ class SwooleRpcTask extends Task
             'max_request' => 500,
         ]);
     }
-
 }
-
