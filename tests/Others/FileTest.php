@@ -17,7 +17,7 @@ use Tests\UnitTestCase;
  */
 class FileTest extends UnitTestCase
 {
-    public function testFOpen()
+    public function testReadFileToArray()
     {
         $file = ROOT_PATH . '/public/static/file/user.txt';
         $handler = fopen($file, 'r');
