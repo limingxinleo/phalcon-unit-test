@@ -22,4 +22,18 @@ class StrTest extends UnitTestCase
         $this->assertEquals('AZ', strtoupper('az'));
         $this->assertEquals('哈哈AZ', mb_strtoupper('哈哈az'));
     }
+
+    public function testGetUrlExtension()
+    {
+        $url = 'http://sina.com.cn/dd/ss/a.php';
+        preg_match('/\.(\w+)$/', $url, $match);
+        $this->assertEquals('php', $match[1]);
+
+        $arr = parse_url($url);
+        $arr = pathinfo($arr['path']);
+        $this->assertEquals('php', $arr['extension']);
+
+        $arr = explode('.', $url);
+        $this->assertEquals('php', $arr[count($arr) - 1]);
+    }
 }
