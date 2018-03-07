@@ -30,6 +30,6 @@ class PregTest extends UnitTestCase
         $this->assertEquals(1, Match::getInstance()->isNumber('-AAA0FF'));
         $this->assertEquals(0, Match::getInstance()->isNumber('-011AF'));
         $this->assertEquals(1, Match::getInstance()->isNumber('-11AF'));
-        $this->assertEquals(1, is_numeric('AF'));
+        $this->assertFalse(is_numeric('AF'));
     }
 }

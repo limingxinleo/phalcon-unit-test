@@ -18,7 +18,7 @@ class ImageTest extends UnitTestCase
     public function testGetimagesize()
     {
         $image = ROOT_PATH . '/public/static/images/logo.png';
-
+        $image = getimagesize($image);
         $this->assertEquals(3, $image[2]);
     }
 }
