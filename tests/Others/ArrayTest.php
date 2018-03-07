@@ -23,4 +23,15 @@ class ArrayTest extends UnitTestCase
 
         $this->assertEquals(['a' => 0, 'b' => 1, 'c' => 2], $res);
     }
+
+    public function testQuote()
+    {
+        $items = ['a', 'b', 'c'];
+        foreach ($items as &$item) {
+        }
+        foreach ($items as $item) {
+        }
+
+        $this->assertEquals(['a', 'b', 'b'], $items);
+    }
 }
