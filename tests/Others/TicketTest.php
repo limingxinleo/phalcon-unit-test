@@ -25,32 +25,38 @@ class TicketTest extends UnitTestCase
     {
         register_tick_function([$this, 'doTick']);
         $this->assertEquals(1, $this->count);
-        $this->assertEquals(2, $this->count);
-        if (true) {
-            $this->assertEquals(3, $this->count);
-        }
-        sleep(1);
-        $this->assertEquals(5, $this->count);
-        if (!empty($this->testEmpty)) {
-            $this->assertEquals(6, $this->count);
-        }
-        if (false) {
+        if (version_compare(PHP_VERSION, '7.0', '>=')) {
+            $this->assertEquals(2, $this->count);
+            if (true) {
+                $this->assertEquals(3, $this->count);
+            }
+            sleep(1);
+            $this->assertEquals(5, $this->count);
+            if (!empty($this->testEmpty)) {
+                $this->assertEquals(6, $this->count);
+            }
+            if (false) {
 
-        }
-        $this->assertEquals(7, $this->count);
-        if (false || !empty($this->testEmpty)) {
-            echo 1;
-        }
-        $this->assertEquals(8, $this->count);
-        if (false || !empty($this->testEmpty)) {
+            }
+            $this->assertEquals(7, $this->count);
+            if (false || !empty($this->testEmpty)) {
+                echo 1;
+            }
+            $this->assertEquals(8, $this->count);
+            if (false || !empty($this->testEmpty)) {
 
+            }
+            $this->assertEquals(10, $this->count);
+            if ($this->retFalse()) {
+                echo 1;
+            }
+            $this->assertEquals(11, $this->count);
+            $this->assertEquals(12, $this->count);
+            if (true) {
+
+            }
+            $this->assertEquals(14, $this->count);
         }
-        $this->assertEquals(10, $this->count);
-        if ($this->retFalse()) {
-            echo 1;
-        }
-        $this->assertEquals(11, $this->count);
-        $this->assertEquals(12, $this->count);
     }
 
     public function doTick()
