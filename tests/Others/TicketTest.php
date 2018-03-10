@@ -36,7 +36,6 @@ class TicketTest extends UnitTestCase
                 $this->assertEquals(6, $this->count);
             }
             if (false) {
-
             }
             $this->assertEquals(7, $this->count);
             if (false || !empty($this->testEmpty)) {
@@ -44,7 +43,6 @@ class TicketTest extends UnitTestCase
             }
             $this->assertEquals(8, $this->count);
             if (false || !empty($this->testEmpty)) {
-
             }
             $this->assertEquals(10, $this->count);
             if ($this->retFalse()) {
@@ -53,7 +51,6 @@ class TicketTest extends UnitTestCase
             $this->assertEquals(11, $this->count);
             $this->assertEquals(12, $this->count);
             if (true) {
-
             }
             $this->assertEquals(14, $this->count);
         }
