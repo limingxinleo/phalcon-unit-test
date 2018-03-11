@@ -130,6 +130,8 @@ return new Config(
         |
         */
         'application' => [
+            'bizDir' => APP_PATH . '/biz/',
+            'commonDir' => APP_PATH . '/common/',
             'configDir' => APP_PATH . '/config/',
             'controllersDir' => APP_PATH . '/controllers/',
             'coreDir' => APP_PATH . '/core/',
@@ -292,5 +294,18 @@ return new Config(
             ],
         ],
 
+        /*
+        |--------------------------------------------------------------------------
+        | RPC
+        |--------------------------------------------------------------------------
+        |
+        | 内部通信协议配置
+        |
+        */
+        'rpc' => [
+            'host' => env('RPC_HOST', '0.0.0.0'),
+            'port' => env('RPC_PORT', 11521),
+            'daemonize' => env('RPC_DAEMONIZE', false),
+        ],
     ]
 );
