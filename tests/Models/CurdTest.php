@@ -16,36 +16,16 @@ use Tests\UnitTestCase;
  */
 class CurdTest extends UnitTestCase
 {
-    public function testAdd()
+    public function testAddAndEditAndDelete()
     {
         $user = new User();
         $user->name = 'test';
         $user->role_id = 1;
         $this->assertTrue($user->save());
-    }
 
-    public function testFindFirst()
-    {
         $user = User::findFirst([
-            'order' => 'id DESC',
+            'order' => 'id DESC'
         ]);
-
-        $this->assertEquals('test', $user->name);
-    }
-
-    public function testFind()
-    {
-        $users = User::find();
-
-        $this->assertTrue(count($users) > 0);
-    }
-
-    public function testEdit()
-    {
-        $user = User::findFirst([
-            'order' => 'id DESC',
-        ]);
-
         $user->name = 'updated';
         $this->assertTrue($user->save());
 
@@ -57,24 +37,29 @@ class CurdTest extends UnitTestCase
         $user = User::findFirst([
             'order' => 'id DESC',
         ]);
-
-
         $this->assertEquals('updated', $user->name);
-    }
-
-    public function testDelete()
-    {
-        $user = User::findFirst([
-            'order' => 'id DESC',
-        ]);
 
         $this->assertTrue($user->delete());
-
         $user = User::findFirst([
             'order' => 'id DESC',
         ]);
-
         $this->assertEquals('wxh', $user->name);
+    }
+
+    public function testFindFirst()
+    {
+        $user = User::findFirst([
+            'order' => 'id ASC',
+        ]);
+
+        $this->assertEquals('limx', $user->name);
+    }
+
+    public function testFind()
+    {
+        $users = User::find();
+
+        $this->assertTrue(count($users) > 0);
     }
 
     public function testCount()

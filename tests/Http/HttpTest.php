@@ -19,7 +19,10 @@ class HttpTest extends HttpTestCase
     public function testJsonResponseCase()
     {
         $response = $this->post('/index/index');
-        $data = json_decode($response->getBody()->getContents());
+        $response = json_decode($response->getBody()->getContents());
+        $this->assertTrue($response->success);
+
+        $data = $response->data;
         $this->assertEquals(System::getInstance()->version(), $data->version);
         $this->assertEquals("You're now flying with Phalcon. Great things are about to happen!", $data->message);
     }
