@@ -36,4 +36,10 @@ class StrTest extends UnitTestCase
         $arr = explode('.', $url);
         $this->assertEquals('php', $arr[count($arr) - 1]);
     }
+
+    public function testStripTags()
+    {
+        $this->assertEquals('alert(1)', strip_tags('<script>alert(1)</script>'));
+        $this->assertEquals('alert(1)', strip_tags('<script>alert(1)<script>'));
+    }
 }
