@@ -16,4 +16,9 @@ class ErrorCode extends Enum
      * @Message('系统错误')
      */
     public static $ENUM_SYSTEM_ERROR = 400;
+
+    /**
+     * @Message('TOKEN 不符')
+     */
+    public static $ENUM_AUTH_TOKEN_ERROR = 1001;
 }
