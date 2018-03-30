@@ -33,8 +33,9 @@ class CookiesTest extends HttpTestCase
         }
 
         $data = json_decode($response->getBody()->getContents());
-
+        $token = $data->data->token;
         $this->assertTrue($data->success);
+
         $response = $this->post('/api/index/cookie');
         $data = json_decode($response->getBody()->getContents());
         $this->assertFalse($data->success);
@@ -47,6 +48,7 @@ class CookiesTest extends HttpTestCase
         ]);
         $data = json_decode($response->getBody()->getContents());
         $this->assertTrue($data->success);
+        $this->assertEquals($token, $data->data->token);
     }
 
     public function testRequestWithCookieFileCase()

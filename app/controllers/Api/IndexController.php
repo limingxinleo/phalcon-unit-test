@@ -58,10 +58,12 @@ class IndexController extends Controller
         if ($this->request->isPost()) {
             // 验证Cookie
             $cookie = Redis::get('php:unit:token');
-            if ($cookie != $this->cookies->get('AUTH_TOKEN')) {
+            if ($cookie != $this->cookies->get('AUTH_TOKEN')->getValue()) {
                 throw new BizException(ErrorCode::$ENUM_AUTH_TOKEN_ERROR);
             }
-            return Response::success();
+            return Response::success([
+                'token' => $this->cookies->get('AUTH_TOKEN')->getValue()
+            ]);
         }
 
         // 设置Cookie
@@ -69,6 +71,8 @@ class IndexController extends Controller
         Redis::set('php:unit:token', $token);
         $this->cookies->set('AUTH_TOKEN', $token);
 
-        return Response::success();
+        return Response::success([
+            'token' => $token
+        ]);
     }
 }
