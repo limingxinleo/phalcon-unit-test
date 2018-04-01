@@ -9,7 +9,6 @@
 namespace Tests\Others;
 
 use App\Models\User;
-use Phalcon\Forms\Element\Text;
 use Tests\UnitTestCase;
 
 class SerializeTest extends UnitTestCase
