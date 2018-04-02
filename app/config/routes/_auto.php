@@ -23,3 +23,4 @@ $router->add('/api/index', 'App\\Controllers\\Api\\Index::index');
 $router->add('/api/index/upload', 'App\\Controllers\\Api\\Index::upload');
 $router->add('/api/index/middleware', 'App\\Controllers\\Api\\Index::middleware');
 $router->add('/api/index/cookie', 'App\\Controllers\\Api\\Index::cookie');
+$router->add('/api/index/session', 'App\\Controllers\\Api\\Index::session');

@@ -8,6 +8,8 @@
 // +----------------------------------------------------------------------
 namespace App\Controllers;
 
+use App\Utils\Request;
+
 abstract class Controller extends \Phalcon\Mvc\Controller
 {
     public function initialize()
@@ -17,6 +19,12 @@ abstract class Controller extends \Phalcon\Mvc\Controller
     public function beforeExecuteRoute()
     {
         // 在每一个找到的动作前执行
+        /** @var \Phalcon\Logger\AdapterInterface $logger */
+        $logger = di('logger')->getLogger('request');
+        $message = $this->request->getURI() . PHP_EOL;
+        $message .= json_encode(Request::get()) . PHP_EOL;
+        $message .= json_encode($this->request->getHeaders()) . PHP_EOL;
+        $logger->info($message);
     }
 
     public function afterExecuteRoute()

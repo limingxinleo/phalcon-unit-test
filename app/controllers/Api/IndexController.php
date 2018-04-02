@@ -5,6 +5,7 @@ namespace App\Controllers\Api;
 use App\Common\Enums\ErrorCode;
 use App\Common\Exceptions\BizException;
 use App\Controllers\Controller;
+use App\Models\User;
 use App\Utils\Redis;
 use App\Utils\Response;
 use Phalcon\Http\Request\File;
@@ -73,6 +74,30 @@ class IndexController extends Controller
 
         return Response::success([
             'token' => $token
+        ]);
+    }
+
+    public function sessionAction()
+    {
+        if ($this->request->isPost()) {
+            // 验证Cookie
+            $user = $this->session->get('AUTH_USER');
+            if (!$user) {
+                throw new BizException(ErrorCode::$ENUM_SESSION_ERROR);
+            }
+
+            return Response::success([
+                'user' => $user
+            ]);
+        }
+
+        // 设置Cookie
+        $user = User::findFirst(1)->toArray();
+        $user['uniqid'] = uniqid();
+        $this->session->set('AUTH_USER', $user);
+
+        return Response::success([
+            'user' => $user
         ]);
     }
 }

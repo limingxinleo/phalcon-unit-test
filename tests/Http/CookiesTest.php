@@ -83,4 +83,40 @@ class CookiesTest extends HttpTestCase
         $data = json_decode($contents);
         $this->assertTrue($data->success);
     }
+
+    public function testRequestSessionCase()
+    {
+        $response = $this->get('/api/index/session');
+        $cookies = $response->getHeader('Set-Cookie');
+        $cookieArray = [];
+        foreach ($cookies as $cookie) {
+            preg_match('/(.*);/U', $cookie, $res);
+            if (isset($res[1])) {
+                list($key, $value) = explode('=', $res[1]);
+                $cookieArray[$key] = $value;
+            }
+        }
+        $cookieStr = '';
+        foreach ($cookieArray as $key => $value) {
+            $cookieStr .= $key . '=' . $value . ';';
+        }
+
+        $data = json_decode($response->getBody()->getContents());
+        $this->assertTrue($data->success);
+        $expect = $data->data->user;
+
+        $response = $this->post('/api/index/session');
+        $data = json_decode($response->getBody()->getContents());
+        $this->assertFalse($data->success);
+        $this->assertEquals(1002, $data->errorCode);
+
+        $response = $this->post('/api/index/session', [
+            'headers' => [
+                'Cookie' => $cookieStr
+            ],
+        ]);
+        $data = json_decode($response->getBody()->getContents());
+        $this->assertTrue($data->success);
+        $this->assertEquals($expect, $data->data->user);
+    }
 }

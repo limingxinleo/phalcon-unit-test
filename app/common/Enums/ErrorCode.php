@@ -21,4 +21,9 @@ class ErrorCode extends Enum
      * @Message('TOKEN 不符')
      */
     public static $ENUM_AUTH_TOKEN_ERROR = 1001;
+
+    /**
+     * @Message('SESSION ERROR')
+     */
+    public static $ENUM_SESSION_ERROR = 1002;
 }
