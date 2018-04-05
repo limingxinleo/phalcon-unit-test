@@ -8,6 +8,7 @@
 // +----------------------------------------------------------------------
 namespace Tests\Others;
 
+use App\Biz\Objects\Quote;
 use Tests\UnitTestCase;
 
 /**
@@ -34,7 +35,7 @@ class ArrayTest extends UnitTestCase
     }
 
     /**
-     * @desc 测试遍历引用的BUG ?? 已被修复 ??
+     * @desc   测试遍历引用的BUG ?? 已被修复 ??
      * @author limx
      */
     public function testForeachQuote()
@@ -46,5 +47,38 @@ class ArrayTest extends UnitTestCase
         foreach ($arr as &$value) {
         }
         $this->assertEquals([1, 2, 3], $arr);
+    }
+
+    public function testArrayQuote()
+    {
+        Quote::getInstance()->getValues()['test'] = 'test';
+        $this->assertEquals([], Quote::getInstance()->getValues());
+
+        Quote::getInstance()->getValuesQuote()['test'] = 'test';
+        $this->assertEquals(['test' => 'test'], Quote::getInstance()->getValues());
+    }
+
+    public function testObjectQuote()
+    {
+        $user = Quote::getInstance()->getObject();
+        $user->name = 'limx2';
+
+        $this->assertEquals($user, Quote::getInstance()->getObject());
+    }
+
+    public function testForeachWord()
+    {
+        $arr1 = [];
+        for ($i = 'a'; $i <= 'z'; $i++) {
+            $arr1[] = $i;
+        }
+
+        $arr2 = [];
+        for ($i = ord('a'); $i <= ord('z'); $i++) {
+            $arr2[] = $i;
+        }
+
+        $this->assertEquals(676, count($arr1));
+        $this->assertEquals(26, count($arr2));
     }
 }
