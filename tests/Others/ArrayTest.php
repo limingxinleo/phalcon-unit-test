@@ -32,4 +32,19 @@ class ArrayTest extends UnitTestCase
 
         $this->assertEquals(['a', 'b', 'b'], $items);
     }
+
+    /**
+     * @desc 测试遍历引用的BUG ?? 已被修复 ??
+     * @author limx
+     */
+    public function testForeachQuote()
+    {
+        $arr = [1, 2, 3];
+        foreach ($arr as &$value) {
+        }
+        $this->assertEquals([1, 2, 3], $arr);
+        foreach ($arr as &$value) {
+        }
+        $this->assertEquals([1, 2, 3], $arr);
+    }
 }
