@@ -1,6 +1,6 @@
 <?php
 // +----------------------------------------------------------------------
-// | Quote.php [ WE CAN DO IT JUST THINK IT ]
+// | Invoke.php [ WE CAN DO IT JUST THINK IT ]
 // +----------------------------------------------------------------------
 // | Copyright (c) 2016-2017 limingxinleo All rights reserved.
 // +----------------------------------------------------------------------
@@ -8,34 +8,34 @@
 // +----------------------------------------------------------------------
 namespace App\Biz\Objects;
 
-use App\Models\User;
+use App\Common\Enums\ErrorCode;
+use App\Common\Exceptions\BizException;
 use Xin\Traits\Common\InstanceTrait;
 
-class Quote
+class Invoke
 {
     use InstanceTrait;
 
-    public $values = [];
-
-    public $object;
-
-    public function __construct()
+    public function __invoke()
     {
-        $this->object = User::findFirst(1);
+        $params = func_get_args();
+        if (!isset($params[0])) {
+            throw new BizException(ErrorCode::$ENUM_SYSTEM_ERROR);
+        }
+
+        $method = $params[0];
+        array_shift($params);
+
+        return call_user_func_array([$this, $method], $params);
     }
 
-    public function getValues()
+    public function test($x)
     {
-        return $this->values;
+        return $x;
     }
 
-    public function &getValuesQuote()
+    public function add($a, $b)
     {
-        return $this->values;
-    }
-
-    public function getObject()
-    {
-        return $this->object;
+        return $a + $b;
     }
 }

@@ -9,6 +9,7 @@
 namespace Tests\Others;
 
 use App\Biz\Objects\Alias;
+use App\Biz\Objects\Invoke;
 use Tests\UnitTestCase;
 use Alias2;
 
@@ -37,5 +38,16 @@ class ClassTest extends UnitTestCase
         $this->assertFalse(class_exists('Alias3'));
         class_alias(Alias::class, 'Alias3');
         $this->assertTrue(class_exists('Alias3'));
+    }
+
+    public function testInvoke()
+    {
+        $cls = new Invoke();
+        $this->assertEquals(11, $cls('test', 11));
+        $this->assertEquals([1, 2, 3], $cls('test', [1, 2, 3]));
+        $this->assertEquals('x', $cls('test', 'x'));
+
+        $this->assertEquals(3, $cls('add', 1, 2));
+        $this->assertEquals(7, $cls('add', 5, 2));
     }
 }

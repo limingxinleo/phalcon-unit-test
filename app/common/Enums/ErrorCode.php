@@ -26,4 +26,9 @@ class ErrorCode extends Enum
      * @Message('SESSION ERROR')
      */
     public static $ENUM_SESSION_ERROR = 1002;
+
+    /**
+     * @Message('Invoke测试 至少传入一个参数')
+     */
+    public static $ENUM_INVOKE_ERROR = 2000;
 }
