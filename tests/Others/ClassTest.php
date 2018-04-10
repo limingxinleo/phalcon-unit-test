@@ -30,4 +30,12 @@ class ClassTest extends UnitTestCase
         $this->assertTrue($o2 instanceof Alias);
         $this->assertTrue($o2 instanceof Alias2);
     }
+
+    public function testClassExist()
+    {
+        $this->assertTrue(class_exists(Alias::class));
+        $this->assertFalse(class_exists('Alias3'));
+        class_alias(Alias::class, 'Alias3');
+        $this->assertTrue(class_exists('Alias3'));
+    }
 }
