@@ -10,6 +10,7 @@ namespace Tests\Others;
 
 use App\Biz\Objects\Alias;
 use App\Biz\Objects\Invoke;
+use App\Common\Enums\ErrorCode;
 use Tests\UnitTestCase;
 use Alias2;
 
@@ -49,5 +50,11 @@ class ClassTest extends UnitTestCase
 
         $this->assertEquals(3, $cls('add', 1, 2));
         $this->assertEquals(7, $cls('add', 5, 2));
+
+        try {
+            $cls();
+        } catch (\Exception $ex) {
+            $this->assertEquals(ErrorCode::$ENUM_INVOKE_ERROR, $ex->getCode());
+        }
     }
 }

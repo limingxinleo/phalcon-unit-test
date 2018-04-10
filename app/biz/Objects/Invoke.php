@@ -20,7 +20,7 @@ class Invoke
     {
         $params = func_get_args();
         if (!isset($params[0])) {
-            throw new BizException(ErrorCode::$ENUM_SYSTEM_ERROR);
+            throw new BizException(ErrorCode::$ENUM_INVOKE_ERROR);
         }
 
         $method = $params[0];
