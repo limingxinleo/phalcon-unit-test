@@ -42,4 +42,44 @@ class StrTest extends UnitTestCase
         $this->assertEquals('alert(1)', strip_tags('<script>alert(1)</script>'));
         $this->assertEquals('alert(1)', strip_tags('<script>alert(1)<script>'));
     }
+
+    public function testStrtrim()
+    {
+        $str = "\r\n Hello World!\r \n";
+        $this->assertEquals('Hello World!', trim($str));
+
+        $str = "\r\n Hello World!\r \n";
+        $this->assertEquals("\r\n Hello World!", rtrim($str));
+
+        $str = "\r\n Hello World!\r \n";
+        $this->assertEquals("Hello World!\r \n", ltrim($str));
+    }
+
+    public function testStrPad()
+    {
+        $this->assertEquals('00000001', str_pad('1', 8, '0', STR_PAD_LEFT));
+        $this->assertEquals('11000000', str_pad('11', 8, '0', STR_PAD_RIGHT));
+        $this->assertEquals('00011000', str_pad('11', 8, '0', STR_PAD_BOTH));
+    }
+
+    public function testStrRepeat()
+    {
+        $this->assertEquals('0000', str_repeat('0', 4));
+    }
+
+    public function testStrSplit()
+    {
+        $this->assertEquals([1, 1, 1], str_split('111', 1));
+        $this->assertEquals([10, 10, '10'], str_split('101010', 2));
+    }
+
+    public function testStrRev()
+    {
+        $this->assertEquals('hello', strrev('olleh'));
+    }
+
+    public function testStrWordwrap()
+    {
+        $this->assertEquals("I\nam\nlimx", wordwrap('I am limx', 1));
+    }
 }
