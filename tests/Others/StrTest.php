@@ -41,6 +41,7 @@ class StrTest extends UnitTestCase
     {
         $this->assertEquals('alert(1)', strip_tags('<script>alert(1)</script>'));
         $this->assertEquals('alert(1)', strip_tags('<script>alert(1)<script>'));
+        $this->assertEquals('@()【】{}', strip_tags('@()【】{}'));
     }
 
     public function testStrtrim()
