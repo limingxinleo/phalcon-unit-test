@@ -49,11 +49,15 @@ class HashTest extends UnitTestCase
 
         $encrypted = mcrypt_encrypt(MCRYPT_RIJNDAEL_128, $key, $data, MCRYPT_MODE_CBC, $iv);
         $pass = base64_encode($encrypted);
-
-        openssl_encrypt($data, "AES-128-CBC", $key, OPENSSL_RAW_DATA, $iv);
-        $pass2 = base64_encode($encrypted);
+        $data2 = mcrypt_decrypt(MCRYPT_RIJNDAEL_128, $key, base64_decode($pass), MCRYPT_MODE_CBC, $iv);
+        $this->assertEquals($data, rtrim($data2, "\0"));
 
         error_reporting(E_ALL);
-        $this->assertEquals($pass2, $pass);
+
+        $encrypted = openssl_encrypt($data, "AES-128-CBC", $key, OPENSSL_RAW_DATA, $iv);
+        $pass2 = base64_encode($encrypted);
+        $data2 = openssl_decrypt(base64_decode($pass2), "AES-128-CBC", $key, OPENSSL_RAW_DATA, $iv);
+        $this->assertEquals($data, $data2);
+
     }
 }
