@@ -35,6 +35,25 @@ class HashTest extends UnitTestCase
 
         $pwd3 = hash('md5', $this->password);
         $pwd4 = md5($this->password);
+
         $this->assertEquals($pwd3, $pwd4);
+    }
+
+    public function testMcryptAndOpenssl()
+    {
+        $iv = "1234567890123412";
+        $key = 'd48d03c3322006ec772a7eefd8532c88';
+        $data = '111111';
+
+        error_reporting(E_ALL & ~E_DEPRECATED);
+
+        $encrypted = mcrypt_encrypt(MCRYPT_RIJNDAEL_128, $key, $data, MCRYPT_MODE_CBC, $iv);
+        $pass = base64_encode($encrypted);
+
+        openssl_encrypt($data, "AES-128-CBC", $key, OPENSSL_RAW_DATA, $iv);
+        $pass2 = base64_encode($encrypted);
+
+        error_reporting(E_ALL);
+        $this->assertEquals($pass2, $pass);
     }
 }
