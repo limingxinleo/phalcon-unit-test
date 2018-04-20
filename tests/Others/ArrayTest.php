@@ -9,6 +9,7 @@
 namespace Tests\Others;
 
 use App\Biz\Objects\Quote;
+use App\Biz\Objects\Tree\JsonArray;
 use Tests\UnitTestCase;
 
 /**
@@ -83,5 +84,38 @@ class ArrayTest extends UnitTestCase
 
         $this->assertEquals(676, count($arr1));
         $this->assertEquals(26, count($arr2));
+    }
+
+    public function testArrayMerge()
+    {
+        $arr1 = [1, 2, 3];
+        $arr2 = [4, 5, 6];
+        $this->assertEquals([1, 2, 3, 4, 5, 6], array_merge($arr1, $arr2));
+        $this->assertEquals([1, 2, 3], $arr1 + $arr2);
+
+        $arr1 = ['a' => 1, 'b' => 2, 'c' => 3];
+        $arr2 = ['b' => 4, 'c' => 5, 'd' => 6];
+        $this->assertEquals(['a' => 1, 'b' => 4, 'c' => 5, 'd' => 6], array_merge($arr1, $arr2));
+        $this->assertEquals(['a' => 1, 'b' => 2, 'c' => 3, 'd' => 6], $arr1 + $arr2);
+    }
+
+    public function testArrayToTree()
+    {
+        $arr = [
+            1 => ['id' => 1, 'pid' => 0],
+            2 => ['id' => 2, 'pid' => 1],
+            3 => ['id' => 3, 'pid' => 1],
+            4 => ['id' => 4, 'pid' => 2],
+            5 => ['id' => 5, 'pid' => 3],
+        ];
+
+        $jsonArray = new JsonArray($arr);
+        $jsonArray->toTree();
+
+        $result = $jsonArray->toArray();
+        $this->assertEquals(
+            '[{"id":1,"pid":0,"children":[{"id":2,"pid":1,"children":[{"id":4,"pid":2,"children":[]}]},{"id":3,"pid":1,"children":[{"id":5,"pid":3,"children":[]}]}]}]',
+            json_encode($result)
+        );
     }
 }
