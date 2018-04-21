@@ -45,14 +45,14 @@ class HashTest extends UnitTestCase
         $key = 'd48d03c3322006ec772a7eefd8532c88';
         $data = '111111';
 
-        error_reporting(E_ALL & ~E_DEPRECATED);
-
-        $encrypted = mcrypt_encrypt(MCRYPT_RIJNDAEL_128, $key, $data, MCRYPT_MODE_CBC, $iv);
-        $pass = base64_encode($encrypted);
-        $data2 = mcrypt_decrypt(MCRYPT_RIJNDAEL_128, $key, base64_decode($pass), MCRYPT_MODE_CBC, $iv);
-        $this->assertEquals($data, rtrim($data2, "\0"));
-
-        error_reporting(E_ALL);
+        if (version_compare(PHP_VERSION, '7.2', '<')) {
+            error_reporting(E_ALL & ~E_DEPRECATED);
+            $encrypted = mcrypt_encrypt(MCRYPT_RIJNDAEL_128, $key, $data, MCRYPT_MODE_CBC, $iv);
+            $pass = base64_encode($encrypted);
+            $data2 = mcrypt_decrypt(MCRYPT_RIJNDAEL_128, $key, base64_decode($pass), MCRYPT_MODE_CBC, $iv);
+            $this->assertEquals($data, rtrim($data2, "\0"));
+            error_reporting(E_ALL);
+        }
 
         $encrypted = openssl_encrypt($data, "AES-128-CBC", $key, OPENSSL_RAW_DATA, $iv);
         $pass2 = base64_encode($encrypted);
