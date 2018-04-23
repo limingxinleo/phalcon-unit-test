@@ -58,6 +58,5 @@ class HashTest extends UnitTestCase
         $pass2 = base64_encode($encrypted);
         $data2 = openssl_decrypt(base64_decode($pass2), "AES-128-CBC", $key, OPENSSL_RAW_DATA, $iv);
         $this->assertEquals($data, $data2);
-
     }
 }
