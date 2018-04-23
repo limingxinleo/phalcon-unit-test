@@ -27,7 +27,7 @@ class RedisTest extends UnitTestCase
         parent::setUp();
     }
 
-    public function testMultiExec()
+    public function testRedisMultiExec()
     {
         Redis::multi();
         Redis::incr($this->prefix . 'num1');
@@ -38,7 +38,7 @@ class RedisTest extends UnitTestCase
         $this->assertEquals(1, Redis::get($this->prefix . 'num2'));
     }
 
-    public function testMultiDiscard()
+    public function testRedisMultiDiscard()
     {
         Redis::multi();
         Redis::incr($this->prefix . 'num3');
@@ -47,5 +47,22 @@ class RedisTest extends UnitTestCase
 
         $this->assertFalse(Redis::get($this->prefix . 'num3'));
         $this->assertFalse(Redis::get($this->prefix . 'num4'));
+    }
+
+    public function testRedisLRem()
+    {
+        $key = $this->prefix . 'queue';
+        $data = json_encode(['last' => 'one']);
+        Redis::lpush($key, $data);
+        Redis::lpush($key, $data);
+        Redis::lpush($key, $data);
+        $this->assertEquals(3, Redis::llen($key));
+
+        Redis::lrem($key, $data, 1);
+        $this->assertEquals(2, Redis::llen($key));
+
+        Redis::lrem($key, $data, 0);
+        $this->assertEquals(0, Redis::llen($key));
+        $this->assertFalse(Redis::exists($key));
     }
 }
