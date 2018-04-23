@@ -65,4 +65,26 @@ class RedisTest extends UnitTestCase
         $this->assertEquals(0, Redis::llen($key));
         $this->assertFalse(Redis::exists($key));
     }
+
+    public function testRedisBrpopLpush()
+    {
+        $key1 = $this->prefix . 'queue1';
+        $key2 = $this->prefix . 'queue2';
+
+        $data = json_encode(['last' => 'one']);
+        Redis::lpush($key1, $data);
+        Redis::lpush($key1, $data);
+        Redis::lpush($key1, $data);
+        $this->assertEquals(3, Redis::llen($key1));
+        $this->assertEquals(0, Redis::llen($key2));
+
+        $data1 = Redis::brpoplpush($key1, $key2, 0);
+        $this->assertEquals($data, $data1);
+        $this->assertEquals(2, Redis::llen($key1));
+        $this->assertEquals(1, Redis::llen($key2));
+
+        $this->assertEquals(Redis::brpoplpush($key1, $key2, 0), Redis::brpoplpush($key1, $key2, 0));
+        $this->assertEquals(0, Redis::llen($key1));
+        $this->assertEquals(3, Redis::llen($key2));
+    }
 }
