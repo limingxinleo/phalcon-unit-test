@@ -39,12 +39,13 @@ class HashTest extends UnitTestCase
         $this->assertEquals($pwd3, $pwd4);
     }
 
-    public function testMcryptAndOpenssl()
+    public function testHashMcrypt()
     {
         $iv = "1234567890123412";
         $key = 'd48d03c3322006ec772a7eefd8532c88';
         $data = '111111';
 
+        $this->assertTrue(true);
         if (version_compare(PHP_VERSION, '7.2', '<')) {
             error_reporting(E_ALL & ~E_DEPRECATED);
             $encrypted = mcrypt_encrypt(MCRYPT_RIJNDAEL_128, $key, $data, MCRYPT_MODE_CBC, $iv);
@@ -53,6 +54,13 @@ class HashTest extends UnitTestCase
             $this->assertEquals($data, rtrim($data2, "\0"));
             error_reporting(E_ALL);
         }
+    }
+
+    public function testHashOpenssl()
+    {
+        $iv = "1234567890123412";
+        $key = 'd48d03c3322006ec772a7eefd8532c88';
+        $data = '111111';
 
         $encrypted = openssl_encrypt($data, "AES-128-CBC", $key, OPENSSL_RAW_DATA, $iv);
         $pass2 = base64_encode($encrypted);
