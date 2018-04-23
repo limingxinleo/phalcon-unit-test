@@ -25,7 +25,7 @@ class QueueTest extends UnitTestCase
         for ($i = 0; $i < 50; $i++) {
             Queue::push(new TestJob());
         }
-        sleep(1);
+        sleep(5);
         $this->assertEquals(50, Redis::get('php:unit:incr'));
     }
 }
