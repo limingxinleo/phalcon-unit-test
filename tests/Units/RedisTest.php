@@ -66,7 +66,7 @@ class RedisTest extends UnitTestCase
         if (version_compare(PHP_VERSION, '7.2', '<')) {
             $this->assertFalse(Redis::exists($key));
         } else {
-            $this->assertFalse(Redis::exists($key) === 0);
+            $this->assertTrue(Redis::exists($key) === 0);
         }
     }
 
