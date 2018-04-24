@@ -11,6 +11,7 @@ namespace Tests\Others;
 use App\Common\Enums\ErrorCode;
 use App\Common\Helper\Match;
 use Tests\UnitTestCase;
+use ErrorException;
 
 /**
  * Class UnitTest
@@ -37,5 +38,20 @@ class FileTest extends UnitTestCase
             ],
             $result
         );
+    }
+
+    public function testRequireAndInclude()
+    {
+        $file = ROOT_PATH . '/storage/data/testRequireAndInclude.php';
+        $data1 = require $file;
+        $data2 = include $file;
+        $this->assertEquals($data1, $data2);
+
+        $file = ROOT_PATH . '/storage/data/testRequireAndIncludeNotExist.php';
+        try {
+            include $file;
+        } catch (ErrorException $ex) {
+            $this->assertEquals(E_WARNING, $ex->getSeverity());
+        }
     }
 }
