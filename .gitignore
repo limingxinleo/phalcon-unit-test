@@ -8,7 +8,6 @@ vendor/
 storage/log/*
 storage/cache/*
 storage/meta/*
-data
 public/dist/
 node_modules/
 package-lock.json

@@ -42,12 +42,12 @@ class FileTest extends UnitTestCase
 
     public function testRequireAndInclude()
     {
-        $file = ROOT_PATH . '/storage/data/testRequireAndInclude.php';
+        $file = ROOT_PATH . '/data/testRequireAndInclude.php';
         $data1 = require $file;
         $data2 = include $file;
         $this->assertEquals($data1, $data2);
 
-        $file = ROOT_PATH . '/storage/data/testRequireAndIncludeNotExist.php';
+        $file = ROOT_PATH . '/data/testRequireAndIncludeNotExist.php';
         try {
             include $file;
         } catch (ErrorException $ex) {
