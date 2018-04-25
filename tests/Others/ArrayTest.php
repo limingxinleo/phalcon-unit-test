@@ -52,14 +52,22 @@ class ArrayTest extends UnitTestCase
 
     public function testArrayQuote()
     {
-        // PHP 版本 >= 7
-        // Quote::getInstance()->getValues()['test'] = 'test';
-        // $this->assertEquals([], Quote::getInstance()->getValues());
-        //
-        // Quote::getInstance()->getValuesQuote()['test'] = 'test';
-        // $this->assertEquals(['test' => 'test'], Quote::getInstance()->getValues());
+        if (version_compare(PHP_VERSION, '7.0', '>')) {
+            Quote::getInstance()->getValues()['test'] = 'test';
+            $this->assertEquals([], Quote::getInstance()->getValues());
 
-        $this->assertTrue(true);
+            Quote::getInstance()->getValuesQuote()['test'] = 'test';
+            $this->assertEquals(['test' => 'test'], Quote::getInstance()->getValues());
+        }
+
+        $data = [10, 20];
+        $r = &$data[1];
+        $data2 = $data;
+        $data2[1] = 30;
+
+        $this->assertEquals(30, $r);
+        $this->assertEquals(30, $data[1]);
+        $this->assertEquals(30, $data2[1]);
     }
 
     public function testObjectQuote()
