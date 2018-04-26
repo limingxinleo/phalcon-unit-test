@@ -63,7 +63,8 @@ class RedisTest extends UnitTestCase
 
         Redis::lrem($key, $data, 0);
         $this->assertEquals(0, Redis::llen($key));
-        $this->assertTrue(Redis::exists($key) === 0);
+        // 蛋疼，php72 php56返回0，php71 php70返回0
+        $this->assertTrue(Redis::exists($key) == 0);
     }
 
     public function testRedisBrpopLpush()
