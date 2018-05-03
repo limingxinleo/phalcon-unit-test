@@ -88,4 +88,16 @@ class RedisTest extends UnitTestCase
         $this->assertEquals(0, Redis::llen($key1));
         $this->assertEquals(3, Redis::llen($key2));
     }
+
+    public function testIncrWithExpireTime()
+    {
+        $key = 'unit:incr:time';
+        Redis::del($key);
+
+        $res = Redis::incr($key, 3600);
+        $this->assertEquals(1, $res);
+
+        $res = Redis::ttl($key);
+        $this->assertEquals(3600, $res);
+    }
 }
