@@ -39,6 +39,18 @@ class KeywordTest extends UnitTestCase
         $this->assertEquals(['limx', 'Agnes'], $result);
     }
 
+    public function testYieldSend()
+    {
+        $res = Test::getInstance()->yieldSend();
+        $this->assertEquals('limx', $res->current());
+        $this->assertEquals('xxx', $res->send('xxx'));
+        $this->assertEquals('xxx', $res->current());
+        $res->next();
+        $this->assertEquals('Agnes', $res->current());
+        $res->next();
+        $this->assertEquals('xyz', $res->current());
+    }
+
     public function testYieldObject()
     {
         $res = Test::getInstance()->yieldObject();

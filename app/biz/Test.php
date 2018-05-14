@@ -63,4 +63,12 @@ class Test
             yield $v;
         }
     }
+
+    public function yieldSend()
+    {
+        $r = (yield 'limx');
+        yield $r;
+        yield 'Agnes';
+        yield 'xyz';
+    }
 }
