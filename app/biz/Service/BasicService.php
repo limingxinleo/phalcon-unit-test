@@ -8,6 +8,7 @@
 // +----------------------------------------------------------------------
 namespace App\Biz\Service;
 
+use App\Utils\Redis;
 use Xin\Swoole\Rpc\Handler\HanderInterface;
 use Xin\Traits\Common\InstanceTrait;
 
@@ -18,5 +19,10 @@ class BasicService implements HanderInterface
     public function version()
     {
         return di('config')->version;
+    }
+
+    public function getStringFromRedis($key)
+    {
+        return Redis::get($key);
     }
 }

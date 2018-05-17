@@ -14,6 +14,7 @@ use Xin\Swoole\Rpc\Client\Client;
  * Class BasicClient
  * @package App\Common\Clients\Rpc
  * @method version
+ * @method getStringFromRedis($key)
  */
 class BasicClient extends Client
 {
