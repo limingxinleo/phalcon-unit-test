@@ -9,13 +9,10 @@
 namespace App\Biz\Service;
 
 use App\Utils\Redis;
-use Xin\Swoole\Rpc\Handler\HanderInterface;
-use Xin\Traits\Common\InstanceTrait;
+use Xin\Swoole\Rpc\Handler\Handler;
 
-class BasicService implements HanderInterface
+class BasicService extends Handler
 {
-    use InstanceTrait;
-
     public function version()
     {
         return di('config')->version;
