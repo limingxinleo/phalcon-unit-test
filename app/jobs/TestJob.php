@@ -2,8 +2,8 @@
 
 namespace App\Jobs;
 
-use App\Jobs\Contract\JobInterface;
 use App\Utils\Redis;
+use Xin\Swoole\Queue\JobInterface;
 
 class TestJob implements JobInterface
 {
