@@ -22,8 +22,8 @@
         "limingxinleo/say-hello": "*",
         "limingxinleo/x-phalcon-enum": "^1.0",
         "limingxinleo/x-phalcon-config-center": "^1.0",
-        "limingxinleo/x-swoole-rpc": "~1.2.0",
-        "limingxinleo/phalcon-project-library": "^1.3.2"
+        "limingxinleo/x-swoole-rpc": "^1.1.2",
+        "limingxinleo/phalcon-project-library": "^1.3.3"
     },
     "require-dev": {
         "phpunit/phpunit": ">=5.6",
