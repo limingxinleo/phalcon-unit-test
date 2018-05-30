@@ -6,7 +6,7 @@
 // +----------------------------------------------------------------------
 // | Author: limx <715557344@qq.com> <https://github.com/limingxinleo>
 // +----------------------------------------------------------------------
-namespace Tests\Units;
+namespace Tests\Utils;
 
 use App\Utils\Redis;
 use Tests\UnitTestCase;
