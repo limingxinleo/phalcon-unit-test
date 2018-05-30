@@ -17,8 +17,6 @@ class BaseTest extends UnitTestCase
 {
     public function testBaseCase()
     {
-        $this->assertTrue(
-            extension_loaded('phalcon')
-        );
+        verify('not have ext-phalcon', extension_loaded('phalcon'))->true();
     }
 }
