@@ -87,4 +87,13 @@ class Book extends Model
     {
         return parent::findFirst($parameters);
     }
+
+    public function toArray($columns = null)
+    {
+        $ret = parent::toArray($columns);
+        $ret['test'] = '测试';
+        return $ret;
+    }
+
+
 }
