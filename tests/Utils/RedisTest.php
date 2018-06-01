@@ -100,4 +100,28 @@ class RedisTest extends UnitTestCase
         $res = Redis::ttl($key);
         $this->assertEquals(3600, $res);
     }
+
+    public function testRedisZAdd()
+    {
+        $key = 'unit:zadd';
+        Redis::del($key);
+        Redis::zadd($key, 1, 'a1', 2, 'a2');
+        $res = Redis::zrange($key, 0, 1);
+        $this->assertEquals(['a1', 'a2'], $res);
+
+        $arr = ['a1' => 1, 'a2' => 2, 'a3' => 3];
+        $input = [];
+        foreach ($arr as $key => $score) {
+            $input[] = $score;
+            $input[] = $key;
+        }
+        Redis::del($key);
+        Redis::zadd($key, ...$input);
+        $res = Redis::zrange($key, 0, 2);
+        $this->assertEquals(['a1', 'a2', 'a3'], $res);
+
+        Redis::zadd($key, 2.5, 'a4');
+        $res = Redis::zrange($key, 0, 3);
+        $this->assertEquals(['a1', 'a2', 'a4', 'a3'], $res);
+    }
 }
