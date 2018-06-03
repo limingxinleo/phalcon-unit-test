@@ -10,6 +10,7 @@ namespace Tests\Test\Models;
 
 use App\Models\User;
 use Tests\UnitTestCase;
+use App\Models\Book;
 
 /**
  * Class UnitTest
@@ -33,5 +34,28 @@ class BuilderTest extends UnitTestCase
 
         $this->assertTrue($users[0]->id > 0);
         $this->assertTrue(count($users) === 1);
+    }
+
+    public function testLeftJoinModel()
+    {
+        $user = User::class;
+        $book = Book::class;
+
+        $list = User::query()->columns("[$user].*,[$book].*")
+            ->leftJoin($book, "[$book].[uid] = [$user].[id]")
+            ->andWhere("[$user].[id] = :id:")
+            ->bind(['id' => 1], true)
+            ->execute();
+
+        foreach ($list as $item) {
+            /** @var User $userModel */
+            $userModel = $item->{lcfirst($user)};
+            $this->assertEquals(1, $userModel->id);
+            $this->assertEquals('limx', $userModel->name);
+
+            /** @var Book $bookModel */
+            $bookModel = $item->{lcfirst($book)};
+            $this->assertEquals(1, $bookModel->uid);
+        }
     }
 }
