@@ -23,6 +23,7 @@ use PHPUnit\Framework\TestCase;
 use Phalcon\Config;
 use Phalcon\Di;
 use Phalcon\DiInterface;
+use App\Utils\DB;
 
 /**
  * Class UnitTestCase
@@ -56,6 +57,8 @@ abstract class UnitTestCase extends TestCase implements InjectionAwareInterface
         $di = Di::getDefault();
 
         $this->di = $di;
+
+        DB::begin();
     }
 
     /**
@@ -64,6 +67,7 @@ abstract class UnitTestCase extends TestCase implements InjectionAwareInterface
      */
     protected function tearDown()
     {
+        DB::rollback();
     }
 
 
