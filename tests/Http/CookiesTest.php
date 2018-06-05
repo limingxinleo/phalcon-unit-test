@@ -54,7 +54,7 @@ class CookiesTest extends HttpTestCase
     public function testRequestWithCookieFileCase()
     {
         $cookieFile = tempnam(ROOT_PATH . '/storage/cache/', 'cookie_');
-        $url = env('PHPUNIT_URL') . '/api/index/cookie';
+        $url = di('config')->phpunit->url . '/api/index/cookie';
 
         // 请求接口拿到Cookie
         $ch = curl_init($url);
