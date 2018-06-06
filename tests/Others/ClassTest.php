@@ -85,7 +85,7 @@ class ClassTest extends UnitTestCase
 
         $request = new \Ecs\Request\DescribeAvailableResourceRequest2();
         $this->assertEquals('POST', $request->getMethod());
-        
+
         $this->assertTrue($time2 < $time1);
     }
 
