@@ -4,9 +4,9 @@ namespace App\Tasks\Server;
 
 use App\Biz\Service\BasicService;
 use App\Common\Logger\Rpc\LoggerHandler;
+use App\Common\Server;
 use App\Tasks\Task;
 use Xin\Phalcon\Cli\Traits\Input;
-use Xin\Swoole\Rpc\Server;
 
 class ServiceTask extends Task
 {

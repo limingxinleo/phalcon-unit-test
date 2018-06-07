@@ -11,6 +11,7 @@ namespace Tests\Units;
 use App\Common\Clients\Rpc\BasicClient;
 use App\Common\Clients\TestClient;
 use App\Utils\Redis;
+use Phalcon\Cache\BackendInterface;
 use Phalcon\Text;
 use Tests\UnitTestCase;
 use swoole_client;
@@ -48,5 +49,12 @@ class SocketTest extends UnitTestCase
         $val = Text::random(10);
         Redis::set($key, $val);
         $this->assertEquals($val, BasicClient::getInstance()->getStringFromRedis($key));
+    }
+
+    public function testWorkProcess()
+    {
+        /** @var BackendInterface $cache */
+        $cache = di('cache');
+        $this->assertEquals('Hi, limx', $cache->get('another:task:save:cache'));
     }
 }
