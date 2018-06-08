@@ -29,8 +29,12 @@ class Server extends RpcServer
 
             while (true) {
                 $proc = new swoole_process(function (swoole_process $p) {
-                    $task = ROOT_PATH . '/run test:test@addCache';
-                    exec('php ' . $task);
+                    /** @var BackendInterface $cache */
+                    $cache = di('cache');
+                    $cache->save('another:task:save:cache', 'Hi, limx');
+
+                    // $task = ROOT_PATH . '/run test:test@addCache';
+                    // exec('php ' . $task);
                 });
                 $proc->start();
                 sleep(1);
