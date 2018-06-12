@@ -55,4 +55,14 @@ class HttpTest extends HttpTestCase
         $this->assertEquals('image', $data->key);
         $this->assertEquals('logo.png', $data->name);
     }
+
+    public function testHttpMatchRouter()
+    {
+        $id = rand(0, 999999);
+        $response = $this->post("/api/detail/{$id}");
+        $res = json_decode($response->getBody()->getContents());
+
+        $this->assertTrue($res->success);
+        $this->assertEquals($id, $res->data);
+    }
 }
