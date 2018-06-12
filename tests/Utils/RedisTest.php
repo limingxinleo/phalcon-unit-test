@@ -124,4 +124,12 @@ class RedisTest extends UnitTestCase
         $res = Redis::zrange($key, 0, 3);
         $this->assertEquals(['a1', 'a2', 'a4', 'a3'], $res);
     }
+
+    public function testRedisIncrMax()
+    {
+        Redis::set('test:incr', '9223372036854775807');
+        $in = Redis::incr('test:incr');
+
+        $this->assertFalse($in);
+    }
 }
