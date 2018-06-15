@@ -18,7 +18,7 @@ class AndOrTest extends UnitTestCase
         $b = bindec('0101');
 
         $c = $a & $b;
-        $this->assertEquals('0101', decbin($c));
+        $this->assertEquals(101, decbin($c));
     }
 
     public function testOrCase()
