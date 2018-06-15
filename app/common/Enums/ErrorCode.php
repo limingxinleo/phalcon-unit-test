@@ -31,4 +31,14 @@ class ErrorCode extends Enum
      * @Message('Invoke测试 至少传入一个参数')
      */
     public static $ENUM_INVOKE_ERROR = 2000;
+
+    /**
+     * @Message('Calculater 未定义')
+     */
+    public static $ENUM_CALCULATER_NOT_DEFINED = 2001;
+
+    /**
+     * @Message('Calculater 表达式不合法')
+     */
+    public static $ENUM_CALCULATER_STRING_INVALID = 2002;
 }

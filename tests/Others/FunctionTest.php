@@ -8,6 +8,7 @@
 // +----------------------------------------------------------------------
 namespace Tests\Others;
 
+use App\Biz\Calculater\Calculater;
 use App\Biz\Objects\CallNext;
 use Tests\UnitTestCase;
 
@@ -22,5 +23,27 @@ class FunctionTest extends UnitTestCase
         $res = exec(ROOT_PATH . '/echo2.sh');
 
         $this->assertEquals('Hi, Agnes', $res);
+    }
+
+    public function testCalculater()
+    {
+        $params = [
+            1 => 1,
+            2 => 3,
+            10 => 22,
+            11 => 123
+        ];
+
+        $string = '+ (1) (+ (1) (2))';
+        $result = Calculater::getInstance()->calculater($string, $params);
+        $this->assertEquals(5, $result);
+
+        $string = '+ (1) (+ (1) 2)';
+        $result = Calculater::getInstance()->calculater($string, $params);
+        $this->assertEquals(4, $result);
+
+        $string = '+ (1) (+ 1 (11))';
+        $result = Calculater::getInstance()->calculater($string, $params);
+        $this->assertEquals(125, $result);
     }
 }
