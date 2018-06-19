@@ -41,4 +41,9 @@ class ErrorCode extends Enum
      * @Message('Calculater 表达式不合法')
      */
     public static $ENUM_CALCULATER_STRING_INVALID = 2002;
+
+    /**
+     * @Message('Excel 不合法')
+     */
+    public static $ENUM_EXCEL_INVALID = 2003;
 }
