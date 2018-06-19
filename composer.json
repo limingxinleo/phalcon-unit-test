@@ -23,7 +23,8 @@
         "limingxinleo/x-phalcon-enum": "^1.0",
         "limingxinleo/x-phalcon-config-center": "^1.0",
         "limingxinleo/x-swoole-rpc": "^1.1.2",
-        "limingxinleo/phalcon-project-library": "~2.0.0"
+        "limingxinleo/phalcon-project-library": "~2.0.0",
+        "know/calculater": "^1.0"
     },
     "require-dev": {
         "phpunit/phpunit": ">=5.6",

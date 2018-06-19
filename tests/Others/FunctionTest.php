@@ -46,4 +46,15 @@ class FunctionTest extends UnitTestCase
         $result = Calculater::getInstance()->calculater($string, $params);
         $this->assertEquals(125, $result);
     }
+
+    public function testKnowCalculater()
+    {
+        $calculater = new \Know\Calculater\Calculater();
+
+        $string = '++ 1 4';
+        $this->assertEquals(7, $calculater->calculate($string, [1, 1, 1, 2, 3]));
+
+        $string = '+ 1 (4)';
+        $this->assertEquals(4, $calculater->calculate($string, [1, 1, 1, 2, 3]));
+    }
 }
