@@ -46,4 +46,44 @@ class CacheTest extends UnitTestCase
 
         $this->assertEmpty($user4);
     }
+
+    public function testModelCacheDelete()
+    {
+        $repository = UserRepository::getInstance();
+        $userId = $repository->add('test', 1);
+
+        $user = $repository->first($userId);
+
+        /** @var \Phalcon\Cache\BackendInterface $cache */
+        $cache = di('cache');
+        $key = '_PHCR:cache:' . $repository->getCacheKey($userId);
+
+        $this->assertTrue(count(Redis::keys($key)) > 0);
+        $this->assertTrue($cache->exists($repository->getCacheKey($userId)));
+
+        $repository->delete($user);
+
+        $this->assertFalse(count(Redis::keys($key)) > 0);
+        $this->assertFalse($cache->exists($repository->getCacheKey($userId)));
+    }
+
+    public function testModelCacheSave()
+    {
+        $repository = UserRepository::getInstance();
+        $userId = $repository->add('test', 1);
+
+        $user = $repository->first($userId);
+
+        /** @var \Phalcon\Cache\BackendInterface $cache */
+        $cache = di('cache');
+        $this->assertTrue($cache->exists($repository->getCacheKey($userId)));
+
+        $user->name = 'test2';
+        $repository->save($user);
+
+        $user2 = $repository->first($userId);
+
+        $this->assertTrue($cache->exists($repository->getCacheKey($userId)));
+        $this->assertEquals($user->name, $user2->name);
+    }
 }

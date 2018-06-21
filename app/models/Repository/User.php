@@ -41,4 +41,34 @@ class User
             'cache' => ['lifetime' => 3600, 'key' => $cacheKey],
         ]);
     }
+
+    public function delete(UserModel $user)
+    {
+        /** @var \Phalcon\Cache\BackendInterface $cache */
+        $cache = di('cache');
+        $key = $this->getCacheKey($user->id);
+        if (!$cache->exists($key)) {
+            return $user->delete();
+        }
+        if ($cache->delete($key)) {
+            return $user->delete();
+        }
+
+        return false;
+    }
+
+    public function save(UserModel $user)
+    {
+        /** @var \Phalcon\Cache\BackendInterface $cache */
+        $cache = di('cache');
+        $key = $this->getCacheKey($user->id);
+        if (!$cache->exists($key)) {
+            return $user->save();
+        }
+        if (!$cache->delete($key)) {
+            throw new \Exception(sprintf("模型[%s][%d]缓存删除失败", UserModel::class, $user->id));
+        }
+
+        return $user->save();
+    }
 }
