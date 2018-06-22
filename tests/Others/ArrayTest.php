@@ -126,4 +126,15 @@ class ArrayTest extends UnitTestCase
             json_encode($result)
         );
     }
+
+    public function testArrayDiff()
+    {
+        $arr = [1, 2, 3, 4];
+        $arr2 = [1, 2, 3];
+
+        $res = array_diff($arr, $arr2);
+        $this->assertEquals([3 => 4], $res);
+        $res = array_diff($arr2, $arr);
+        $this->assertEquals([], $res);
+    }
 }

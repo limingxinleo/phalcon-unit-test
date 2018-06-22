@@ -24,5 +24,6 @@ class TestValidator extends Validator
                 'message' => 'the :field is required'
             ])
         );
+
     }
 }
