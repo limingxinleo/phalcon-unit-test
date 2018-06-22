@@ -132,4 +132,17 @@ class RedisTest extends UnitTestCase
 
         $this->assertFalse($in);
     }
+
+    public function testRedisZRank()
+    {
+        $key = 'unit:zadd';
+        Redis::del($key);
+        Redis::zadd($key, 1, 'a1', 2, 'a2');
+        $res = Redis::zrank($key, 'a1');
+        $this->assertEquals(0, $res);
+        $res = Redis::zrank($key, 'a2');
+        $this->assertEquals(1, $res);
+        $res = Redis::zrank($key, 'a3');
+        $this->assertFalse($res);
+    }
 }
