@@ -137,4 +137,15 @@ class ArrayTest extends UnitTestCase
         $res = array_diff($arr2, $arr);
         $this->assertEquals([], $res);
     }
+
+    public function testUsort()
+    {
+        $arr = [['id' => 1], ['id' => 3], ['id' => 2]];
+        usort($arr, function ($a1, $a2) {
+            if ($a1['id'] === $a2['id']) return 0;
+            return $a1['id'] < $a2['id'] ? -1 : 1;
+        });
+
+        $this->assertEquals([['id' => 1], ['id' => 2], ['id' => 3]], $arr);
+    }
 }
