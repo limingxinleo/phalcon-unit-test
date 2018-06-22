@@ -148,4 +148,14 @@ class ArrayTest extends UnitTestCase
 
         $this->assertEquals([['id' => 1], ['id' => 2], ['id' => 3]], $arr);
     }
+
+    public function testArrayMap()
+    {
+        $arr = null ?? [];
+        $res = array_map(function () {
+            return 1;
+        }, $arr);
+
+        $this->assertEquals([], $res);
+    }
 }
