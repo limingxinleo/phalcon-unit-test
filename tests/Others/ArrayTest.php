@@ -151,7 +151,7 @@ class ArrayTest extends UnitTestCase
 
     public function testArrayMap()
     {
-        $arr = null ?? [];
+        $arr = [];
         $res = array_map(function () {
             return 1;
         }, $arr);
