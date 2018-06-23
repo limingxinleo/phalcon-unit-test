@@ -59,6 +59,15 @@ class MathTest extends UnitTestCase
         $this->assertEquals(1024, pow(2, 10));
     }
 
+    public function testMathCompare()
+    {
+        $id = 101 - 99 > 0 ?: 0;
+        $this->assertEquals(1, $id);
+
+        $id = 99 - 990 > 0 ?: 0;
+        $this->assertEquals(0, $id);
+    }
+
     /**
      * @desc   四舍五入
      * @author limx
