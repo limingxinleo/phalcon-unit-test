@@ -158,4 +158,48 @@ class ArrayTest extends UnitTestCase
 
         $this->assertEquals([], $res);
     }
+
+    public function testArrayWalkRecursive()
+    {
+        $arr = ['l', 'm', 'x'];
+        array_walk_recursive($arr, function (&$val, $key) {
+            $val .= 's';
+        });
+
+        $this->assertEquals(['ls', 'ms', 'xs'], $arr);
+
+        $arr2 = $arr;
+        $arr[0] = 'xx';
+        $this->assertEquals(['ls', 'ms', 'xs'], $arr2);
+
+        $arr = (object)['l', 'm', 'x'];
+        array_walk_recursive($arr, function (&$val, $key) {
+            $val .= 's';
+        });
+        $this->assertEquals(['ls', 'ms', 'xs'], $arr2);
+
+        $obj = new ArrayWalkRecursive();
+        $body = $obj->getBody();
+        array_walk_recursive($body, function (&$val, $key) {
+            $val .= 's';
+        });
+
+        $this->assertEquals(['ls', 'ms', 'xs'], $body);
+        $this->assertEquals(['l', 'm', 'x'], $obj->getBody());
+    }
+}
+
+class ArrayWalkRecursive
+{
+    public $body = [];
+
+    public function __construct()
+    {
+        $this->body = ['l', 'm', 'x'];
+    }
+
+    public function getBody()
+    {
+        return $this->body;
+    }
 }
